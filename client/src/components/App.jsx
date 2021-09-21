@@ -1,16 +1,19 @@
 import React from 'react';
 import Main from './main/Main';
-import Switch from 'react-bootstrap/Switch';
-import { Provider } from 'react-redux';
+import { BrowserRouter, Route } from 'react-router-dom';
+import MyTeam from './team/MyTeam';
 
 const App = () => {
   return (
-    <div>
-
+    <BrowserRouter>
+      <Route exact path="/team">
+        <MyTeam/>
+      </Route>
+      <Route exact path="/teams">
+        <MyTeam/>
+      </Route>
       <Main/>
-
-
-    </div>
+    </BrowserRouter>
   );
 };
 
