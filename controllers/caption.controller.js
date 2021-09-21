@@ -50,10 +50,10 @@ module.exports.captainController = {
           const { login, password } = req.body;
           const candidate = await Captain.findOne({ login });
 
-          if (login) {
+          if (login.length === 0) {
               res.status(401).json({ authorizationError: "необходимо ввести логин" });
           }
-          if (password) {
+          if (password.length === 0) {
               res.status(401).json({ authorizationError: "необходимо ввести пароль" });
           }
           if (!candidate) {
@@ -66,7 +66,6 @@ module.exports.captainController = {
 
           const payload = {
               id: candidate.id,
-
           };
 
           const token =  jwt.sign(payload, process.env.JWT_KEY, {
