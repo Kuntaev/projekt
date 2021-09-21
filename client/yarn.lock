@@ -5414,6 +5414,11 @@
   "resolved" "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.14.4.tgz"
   "version" "1.14.4"
 
+"font-awesome-sass@^4.7.0":
+  "integrity" "sha1-TtppPpFQCc4Asijglk3F7Km8NOE="
+  "resolved" "https://registry.npmjs.org/font-awesome-sass/-/font-awesome-sass-4.7.0.tgz"
+  "version" "4.7.0"
+
 "for-in@^1.0.2":
   "integrity" "sha1-gQaNKVqBQuwKxybG4iAMMPttXoA="
   "resolved" "https://registry.npmjs.org/for-in/-/for-in-1.0.2.tgz"
