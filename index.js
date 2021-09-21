@@ -16,11 +16,11 @@ app.use(
 app.use(require("./routes/index"));
 
 mongoose
-.connect(process.env.MONGO_PORT)
-.then(() => {
-  console.log("Подключено");
-  app.listen(process.env.PORT);
-})
-.catch((e) => {
-  console.log("ошибка при подключении" + e);
-});
+  .connect(process.env.MONGO_PORT)
+  .then(() => {
+    console.log("Подключено");
+    app.listen(process.env.PORT);
+  })
+  .catch((e) => {
+    console.log("ошибка при подключении " + e);
+  });
