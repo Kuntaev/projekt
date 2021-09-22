@@ -7,12 +7,11 @@ const useStyles = makeStyles({
     backgroundSize:'cover',
     backgroundImage: `url("https://i.postimg.cc/Y2grKQDP/xxx.jpg")`,
     background: 'no-repeat',
-    paddingTop:30,
-    paddingLeft:150,
-    paddingRight:150,
-    minHeight:'95.7vh'
+    minHeight:'100vh'
   },
   content:{
+    paddingLeft:150,
+    paddingRight:150,
     marginTop:150
   },
   text:{
@@ -29,7 +28,7 @@ function Main() {
     <div className={classes.main}>
       <Header />
       <div className={classes.content}>
-        <h4 className={classes.text} style={{fontSize:30, marginBottom:10}}>ФУТБОЛЕ НЕТ СЛОВА</h4>
+        <h4 className={classes.text} style={{fontSize:30, marginBottom:10}}>В ФУТБОЛЕ НЕТ СЛОВА</h4>
         <h2 className={classes.text} style={{fontSize:64, marginTop:0}}>НЕВОЗМОЖНО</h2>
       </div>
     </div>

@@ -1,8 +1,12 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles({
   main:{
+    paddingLeft:150,
+    paddingRight:150,
+    paddingTop:30,
     display:'flex',
     alignItems: 'center',
     justifyContent:'space-between'
@@ -31,17 +35,17 @@ function Header() {
   return (
     <div className={classes.main}>
       <div className={classes.content}>
-        <a href="/" className={classes.navBar}>
+        <NavLink to="/" className={classes.navBar}>
       <img src="https://i.postimg.cc/D0V74z05/logo.png" className={classes.logo}/>
-        </a>
-      <a href="/" className={classes.navBar}>Главная</a>
-      <a href="/" className={classes.navBar}>Команды</a>
-      <a href="/" className={classes.navBar}>Моя команда</a>
-      <a href="/" className={classes.navBar}>Назначить игру</a>
+        </NavLink>
+      <NavLink to="/" className={classes.navBar}>Главная</NavLink>
+      <NavLink to="/teams" className={classes.navBar}>Команды</NavLink>
+      <NavLink to="/team" className={classes.navBar}>Моя команда</NavLink>
+      <NavLink to="/play" className={classes.navBar}>Назначить игру</NavLink>
       </div>
-      <a href='/' style={{color:'white', fontSize: 24}}>
-        <i className="fas fa-user" style={{color:'white', fontSize: 24}}></i>
-      </a>
+      <NavLink to='/authorization' style={{color:'white', fontSize: 24}}>
+        <i className="fas fa-user"></i>
+      </NavLink>
     </div>
   );
 }
