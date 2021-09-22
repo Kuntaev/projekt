@@ -28,6 +28,10 @@ const useStyles = makeStyles({
     link: {
         margin: "20px 80px"
     },
+    registr: {
+        fontSize: "20px",
+
+    }
     // img: {
     //     backgroundImage: "URL(https://images.pexels.com/photos/3571065/pexels-photo-3571065.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"
     // }
@@ -45,6 +49,7 @@ const SignUpPage = () => {
     const message = useSelector((state) => state.captain.message)
     const registrationError = useSelector((state) => state.captain.registrationError)
 
+    console.log(registrationError)
 
     const handleName = (e) => {
       setName(e.target.value)
@@ -56,17 +61,11 @@ const SignUpPage = () => {
         setPassword(e.target.value)
     }
     const handleSubmit = () => {
-     dispatch(registrationCaptain({name, login, password}))
+    dispatch(registrationCaptain({ name, login, password }));
     }
 
 
-    if(loading) {
-        return(
-            <Box sx={{ width: '100%' }}>
-                Идет  загрузка......
-            </Box>
-        )
-    }
+
 
     return (
         <Container>
@@ -84,12 +83,12 @@ const SignUpPage = () => {
                             color={message ? "primary" : "error"}
                         >
                             {message ? (
-                                <div>
-                                    <span>аккаунт успешно создан</span>{" "}
-                                    <Link variant="body2" color="secondary" href="/sign-in">
+                                <Box className={classes.registr}>
+                                    <span>Аккаунт успешно создан</span>{" "}
+                                    <Link  color="secondary" href="/sign-in">
                                         войти
                                     </Link>
-                                </div>
+                                </Box>
                             ) : (
                                 ""
                             )}
