@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from '../src/components/App';
-import {Provider} from "react-redux";
-import {store} from "./redux/configStore";
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from './redux/configStore';
 
 ReactDOM.render(
   <React.StrictMode>
-<Provider store={store}>
-    <App />
-</Provider>
+    <Provider store={store}>
+        <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
