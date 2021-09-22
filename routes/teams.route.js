@@ -8,5 +8,6 @@ router.get("/team", teamsController.getTeams)
 router.get("/team/:id", teamsController.getTeamId)
 router.patch("/team/:id", teamsController.editTeam)
 router.delete("/team/:id", teamsController.deleteTeam)
+router.post("/team/image/:id", teamsController.addImage)
 
 module.exports = router
