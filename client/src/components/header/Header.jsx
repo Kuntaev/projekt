@@ -36,7 +36,7 @@ function Header() {
         </a>
       <a href="/" className={classes.navBar}>Главная</a>
       <a href="/" className={classes.navBar}>Команды</a>
-      <a href="/" className={classes.navBar}>Моя команда</a>
+      <a href="/teams" className={classes.navBar}>Моя команда</a>
       <a href="/" className={classes.navBar}>Назначить игру</a>
       </div>
       <a href='/' style={{color:'white', fontSize: 24}}>

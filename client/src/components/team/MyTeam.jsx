@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 const MyTeam = () => {
   const [text, setText] = useState("")
-  const [img, setImg] = useState("")
   const { loadTeam } = useSelector((state) => state.team);
   const dispatch = useDispatch();
 
@@ -13,21 +12,22 @@ const MyTeam = () => {
   }, []);
 
   const handleAddTeam = () => {
-    dispatch(addTeam({text, img}))
+    dispatch(addTeam({text}))
   }
   
 
   return(
     <>
-      <div>
-        Название команды:
-        <input type="text" value={text} onChange={(e) => setText(e.target.value)}/>
-        <button onClick={handleAddTeam}>Добавить</button>
-      </div>
+      {/*<div>*/}
+      {/*  Название команды:*/}
+      {/*  <input type="text" value={text} onChange={(e) => setText(e.target.value)}/>*/}
+      {/*  <button onClick={handleAddTeam}>Добавить</button>*/}
+      {/*</div>*/}
       <br/>
       <div>
         <b>Команды</b>
-        {loadTeam.map((item)=> {
+        {loadTeam?.map((item)=> {
+          console.log(item.image)
           return(
             <>
             <div>
