@@ -1,14 +1,9 @@
 const initialState = {
-  loadTeam: [],
-};
+  loadTeam: []
+}
 
 export function team(state = initialState, action) {
   switch (action.type) {
-    case "load/team/fulfilled":
-      return {
-        ...state,
-        loadTeam: action.payload,
-      };
 
     case "add/team/fulfilled":
       return {
@@ -22,16 +17,6 @@ export function team(state = initialState, action) {
       return state;
   }
 }
-
-export const loadingTeams = () => {
-  return async (dispatch) => {
-    await fetch("/team")
-      .then((res) => res.json())
-      .then((data) => {
-        dispatch({ type: "load/team/fulfilled", payload: data });
-      });
-  };
-};
 
 export const addTeam = (
   text,

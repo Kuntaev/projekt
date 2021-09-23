@@ -3,6 +3,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import {Box, Button, Container, Grid, Link, Paper, TextField, Typography} from "@material-ui/core";
 import {useDispatch, useSelector} from "react-redux";
 import {registrationCaptain} from "../../redux/features/captain";
+import { useHistory } from 'react-router-dom';
 
 
 
@@ -40,6 +41,7 @@ const useStyles = makeStyles({
 const SignUpPage = () => {
     const  classes = useStyles()
     const  dispatch = useDispatch()
+    const history =  useHistory();
 
     const [name, setName] = useState("");
     const [login, setLogin] = useState("");
@@ -61,7 +63,14 @@ const SignUpPage = () => {
         setPassword(e.target.value)
     }
     const handleSubmit = () => {
-    dispatch(registrationCaptain({ name, login, password }));
+    dispatch(registrationCaptain({ name, login, password }))
+    .then(() => {
+            if (!registrationError) {
+                history.push("/sign-in");
+            }
+        })
+        .catch((e) => {});
+
     }
 
 
