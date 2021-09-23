@@ -1,23 +1,24 @@
 import React, { useState } from 'react';
 import { Button, Container, TextField } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { addImage, addTeam } from '../../redux/features/Team';
+import { addTeam } from '../../redux/features/Team';
 
 const Teams = () => {
   const dispatch = useDispatch();
 
   const [text, setText] = useState("");
+  const [image, setImage] = useState("")
 
   const handleAddName = (e) => {
     setText(e.target.value);
   };
 
-  const handleAddImage = async (e) => {
-    await dispatch(addImage(e));
-  };
+  const handleAddImage = (e) => {
+    setImage(e.target.value)
+  }
 
   const handleAddTeam = () => {
-    dispatch(addTeam(text))
+    dispatch(addTeam(text, image))
   }
 
   return (
@@ -35,15 +36,15 @@ const Teams = () => {
         Добавить
       </Button>
       <div>
-        {/*<Button onChange={handleAddImage} variant="contained">*/}
-        {/*  <input*/}
-        {/*    accept="image/*"*/}
-        {/*    id="contained-button-file"*/}
-        {/*    multiple*/}
-        {/*    type="file"*/}
-        {/*    onChange={handleAddImage}*/}
-        {/*  />*/}
-        {/*</Button>*/}
+        <TextField
+          id="outlined-multiline-static"
+          label="Вставте ссылку аватарки"
+          multiline
+          rows={1}
+          value={image}
+          onChange={handleAddImage}
+          variant="outlined"
+        />
       </div>
     </Container>
   );
