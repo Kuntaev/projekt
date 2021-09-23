@@ -5,6 +5,7 @@ import MyTeam from './team/MyTeam';
 import Teams from './team/Teams';
 import SignInPage from './auth/SignInPage';
 import SignUpPage from './auth/SignUpPage';
+import Header from './header/Header';
 
 const App = () => {
   return (
@@ -20,6 +21,8 @@ const App = () => {
       </Route>
       <Route exact path="/teams">
         <Teams/>
+      </Route>
+      <Route exact path="/my-teams">
         <MyTeam/>
       </Route>
 

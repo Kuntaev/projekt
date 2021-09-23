@@ -1,52 +1,71 @@
-import React, { useState } from 'react';
-import { Button, Container, TextField } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
-import { addTeam } from '../../redux/features/Team';
+import React, { useEffect, useState } from "react";
+import { addTeam, loadingTeams } from "../../redux/features/Team";
+import { useDispatch, useSelector } from "react-redux";
+import { Box, Container, Grid } from "@material-ui/core";
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  container: {
+
+  },
+  main: {
+    flexGrow: 0,
+    flexBasis: 33.3333,
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingBottom: 15,
+  },
+  inner: {
+    border: 'solid',
+    padding: 20,
+    "&:hover": {
+      backgroundColor: "black",
+      cursor: "pointer"
+    }
+  },
+  image: {
+    textAlign: "center",
+    height: 180,
+  },
+  name: {
+    fontSize: 20,
+    color: 'red',
+    textAlign: 'center'
+  }
+
+})
 
 const Teams = () => {
+  const [text, setText] = useState("");
+  const { loadTeam } = useSelector((state) => state.team);
   const dispatch = useDispatch();
 
-  const [text, setText] = useState("");
-  const [image, setImage] = useState("")
+  const classes = useStyles()
 
-  const handleAddName = (e) => {
-    setText(e.target.value);
-  };
-
-  const handleAddImage = (e) => {
-    setImage(e.target.value)
-  }
-
-  const handleAddTeam = () => {
-    dispatch(addTeam(text, image))
-  }
-
+  useEffect(() => {
+    dispatch(loadingTeams());
+  }, []);
   return (
-    <Container>
-      <TextField
-        id="outlined-multiline-static"
-        label="Введите название команды"
-        multiline
-        rows={1}
-        value={text}
-        onChange={handleAddName}
-        variant="outlined"
-      />
-      <Button onClick={handleAddTeam} variant="contained" color="primary">
-        Добавить
-      </Button>
-      <div>
-        <TextField
-          id="outlined-multiline-static"
-          label="Вставте ссылку аватарки"
-          multiline
-          rows={1}
-          value={image}
-          onChange={handleAddImage}
-          variant="outlined"
-        />
-      </div>
-    </Container>
+    <>
+      <Container className={classes.container}>
+        <Grid container className={classes.main} spacing={5}>
+          {loadTeam?.map((item) => {
+            return (
+              <Grid item xs={3} >
+                <a href="https://www.fcbarcelona.com/en/">
+                  <Box className={classes.inner}>
+                    <Box className={classes.image}>
+                      <img className={classes.image} src={item.image}/>
+                    </Box>
+                    <Box className={classes.name}>{item.name}</Box>
+                  </Box>
+                </a>
+              </Grid>
+            );
+          })}
+        </Grid>
+      </Container>
+    </>
   );
 };
 

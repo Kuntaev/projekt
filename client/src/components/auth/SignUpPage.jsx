@@ -64,13 +64,6 @@ const SignUpPage = () => {
     }
     const handleSubmit = () => {
     dispatch(registrationCaptain({ name, login, password }))
-    .then(() => {
-            if (!registrationError) {
-                history.push("/sign-in");
-            }
-        })
-        .catch((e) => {});
-
     }
 
 
@@ -85,7 +78,6 @@ const SignUpPage = () => {
                         <Typography component="p" variant="h5">
                             Регистрация
                         </Typography>
-
                         <Typography
                             component="h1"
                             variant="body2"
@@ -93,11 +85,9 @@ const SignUpPage = () => {
                         >
                             {message ? (
                                 <Box className={classes.registr}>
-                                    <span>Аккаунт успешно создан</span>{" "}
-                                    <Link  color="secondary" href="/sign-in">
-                                        войти
-                                    </Link>
+                                    {history.push("/sign-in")}
                                 </Box>
+
                             ) : (
                                 ""
                             )}

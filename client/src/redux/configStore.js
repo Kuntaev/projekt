@@ -8,7 +8,7 @@ import captainReducer from './features/captain';
 export const store = createStore(
   combineReducers({
     team:team,
-    captain: captainReducer
+    captain:captainReducer
   }),
   composeWithDevTools(applyMiddleware(thunk))
 );
