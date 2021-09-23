@@ -1,5 +1,7 @@
 const initialState = {
   loadTeam: [],
+  token:localStorage.getItem("token"),
+  loading:null
 };
 
 export function team(state = initialState, action) {
@@ -13,11 +15,13 @@ export function team(state = initialState, action) {
     case "add/team/fulfilled":
       return {
         ...state,
-        loadTeam: [
-          ...state.loadTeam,
-          action.payload
-        ],
+        loadTeam: [...state.loadTeam, action.payload],
       };
+    case 'add/team/rejected':
+      return {
+        ...state,
+        error:action.payload.error
+      }
     default:
       return state;
   }
@@ -33,29 +37,32 @@ export const loadingTeams = () => {
   };
 };
 
-export const addTeam = (
-  text,
-  image
-) => {
-  return async (dispatch) => {
+export const addTeam = (text, image) => {
+  return async (dispatch, getState) => {
     dispatch({ type: "add/team/pending" });
 
+    const state = getState()
     const response = await fetch(`/team`, {
       method: "POST",
 
       body: JSON.stringify({
         name: text,
-        image: image
+        image: image,
       }),
       headers: {
-        "Content-type": "application/json",
-      },
+        // Authorization:`Bearer ${state.team.token}`
+        "Content-type": "application/json"
+        },
     });
     const json = await response.json();
 
-    dispatch({
-      type: "add/team/fulfilled",
-      payload: json,
-    });
+    if (json.error) {
+      dispatch({type:'add/team/rejected', payload:json})
+    }else {
+      dispatch({
+        type: "add/team/fulfilled",
+        payload: json,
+      });
+    }
   };
 };

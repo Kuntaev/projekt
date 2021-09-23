@@ -6,7 +6,7 @@ const teamSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Event"
   },
-  image: String
+  image: String,
 })
 
 const Team = mongoose.model("Team", teamSchema)
