@@ -65,7 +65,7 @@ export  const  registrationCaptain = (data) => {
   return async (dispatch) => {
       dispatch({type: "caption/sign-up/pending"})
 
-      const  response = await fetch("/registration", {
+      const  response = await fetch("http://localhost:3013/registration", {
           method: "POST",
           body: JSON.stringify(data),
           headers: { "Content-type": "application/json"}
@@ -85,7 +85,7 @@ export  const  registrationCaptain = (data) => {
 export const authorizationCaptain = (data) => {
     return async (dispatch) => {
     dispatch({type: "captain/sign-in/pending"})
-    const response = await fetch("/authorization", {
+    const response = await fetch("http://localhost:3013/authorization", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {"Content-type": "application/json"}

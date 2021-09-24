@@ -15,30 +15,34 @@ import { useHistory } from 'react-router-dom';
 import { authorizationCaptain } from '../../redux/features/captain';
 
 const useStyles = makeStyles({
-    main: {
-        margin: "250px"
-    },
-    name: {
-        margin: "10px 110px "
-    },
-    nname: {
-        margin: "20px 120px "
-    },
-    paper: {
-        margin: "0 150px",
-        width: "1000px",
-        height: "350px"
-    },
     submit: {
-        fontSize: "18px",
+        fontSize: "19px",
         margin: "10px 100px"
     },
     link: {
-        margin: "20px 80px"
-    },
+            margin: "20px 10px"
+        },
   authError: {
       margin: "20px 80px 20px",
 
+  },
+    paper: {
+        margin: "200px 360px",
+        width: "700px",
+        height: "300px",
+
+    },
+    img: {
+        backgroundImage: "URL(https://images.pexels.com/photos/3571065/pexels-photo-3571065.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)",
+        //  width: "1000px",
+        height: "900px"
+    },
+    gridMain: {
+        textAlign: "center",
+        width: "650px"
+    },
+  login: {
+        marginLeft: "150px"
   }
 });
 
@@ -76,61 +80,64 @@ const SignInPage = () => {
   }
   return (
 
-    <Container>
-      <Paper className={classes.paper} elevation={5}>
-        <Box className={classes.main}>
-          <Box className={classes.nname}>
-            <Typography component="p" variant="h5">
-              Авторизация
-            </Typography>
-          </Box>
-          <Box className={classes.authError}>
-            {<Typography component="p" variant="h6" color="secondary">{authorizationError}</Typography>}
-          </Box>
-          <form noValidate>
-            <Grid container spacing={2}>
-              <Grid item={6}>
-                <TextField
-                  onChange={handleLogin}
-                  autoComplete
-                  variant="outlined"
-                  required
-                  fullWidth
-                  label="Логин"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item={6}>
-                <TextField
-                  onChange={handlePassword}
-                  variant="outlined"
-                  required
-                  fullWidth
-                  label="Пароль"
-                  autoComplete
-                  type="password"
-                />
-              </Grid>
-            </Grid>
-            <Box className={classes.link}>
-              <Link href="/sign-up" variant="body2">
-                У вас нет аккаунта? Зарегистрироваться
-              </Link>
-            </Box>
-            <Box>
-              <Button
-                onClick={handleSubmit}
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-              >
-                Авторизоваться
-              </Button>
-            </Box>
-          </form>
-        </Box>
-      </Paper>
-    </Container>
+    <Grid container className={classes.img}>
+        <Grid className={classes.gridMain}>
+            <Paper className={classes.paper} elevation={5}>
+                <Box className={classes.main}>
+                    <Box className={classes.nname}>
+                        <Typography component="p" variant="h5">
+                            Авторизация
+                        </Typography>
+                    </Box>
+                    <Box className={classes.authError}>
+                        {<Typography component="p" variant="h6" color="secondary">{authorizationError}</Typography>}
+                    </Box>
+                    <form noValidate>
+                        <Grid container spacing={4}>
+                            <Grid  className={classes.login} item={6}>
+                                <TextField
+                                    onChange={handleLogin}
+                                    autoComplete
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    label="Логин"
+                                    autoFocus
+                                />
+                            </Grid>
+                            <Grid item={6}>
+                                <TextField
+                                    onChange={handlePassword}
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    label="Пароль"
+                                    autoComplete
+                                    type="password"
+                                />
+                            </Grid>
+                        </Grid>
+                        <Box className={classes.link}>
+                            <Link href="/sign-up" variant="body2">
+                                У вас нет аккаунта? Зарегистрироваться
+                            </Link>
+                        </Box>
+                        <Box>
+                            <Button
+                                onClick={handleSubmit}
+                                variant="contained"
+                                color="primary"
+                                className={classes.submit}
+                            >
+                                Авторизоваться
+                            </Button>
+                        </Box>
+                    </form>
+                </Box>
+            </Paper>
+        </Grid>
+
+    </Grid>
   );
 };
 

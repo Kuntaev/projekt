@@ -8,34 +8,38 @@ import { useHistory } from 'react-router-dom';
 
 
 const useStyles = makeStyles({
-    main: {
-        margin: "250px"
-    },
     name: {
-        margin: "10px 110px "
+        margin: "15px",
+        textAlign: "center"
     },
-    nname: {
-        margin: "20px 120px "
-    },
+    // nname: {
+    //     margin: "20px 120px "
+    // },
     paper: {
-        margin: "0 150px",
-        width: "1000px",
-        height: "350px"
+        margin: "200px 330px",
+        width: "800px",
+        height: "400px",
+
+    },
+    img: {
+        backgroundImage: "URL(https://images.pexels.com/photos/3571065/pexels-photo-3571065.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)",
+        //  width: "1000px",
+        height: "900px"
+    },
+
+    gridMain: {
+        textAlign: "center",
+        width: "650px"
     },
     submit: {
-        fontSize: "18px",
-        margin: "10px 100px"
+        fontSize: "18px"
+    },
+    login: {
+        marginLeft: "180px"
     },
     link: {
-        margin: "20px 80px"
-    },
-    registr: {
-        fontSize: "20px",
-
+        margin: "20px 10px"
     }
-    // img: {
-    //     backgroundImage: "URL(https://images.pexels.com/photos/3571065/pexels-photo-3571065.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"
-    // }
 })
 
 const SignUpPage = () => {
@@ -70,85 +74,86 @@ const SignUpPage = () => {
 
 
     return (
-        <Container>
-            <Paper className={classes.paper} elevation={5}>
 
-            <Box className={classes.main}>
-                    <Box className={classes.nname}>
-                        <Typography component="p" variant="h5">
-                            Регистрация
-                        </Typography>
-                        <Typography
-                            component="h1"
-                            variant="body2"
-                            color={message ? "primary" : "error"}
-                        >
-                            {message ? (
-                                <Box className={classes.registr}>
-                                    {history.push("/sign-in")}
+            <Grid container className={classes.img}>
+                <Grid className={classes.gridMain} >
+                    <Paper className={classes.paper} elevation={5}>
+                        <Box className={classes.main}>
+                            <Box className={classes.nname}>
+                                <Typography component="p" variant="h5">
+                                    Регистрация
+                                </Typography>
+                                <Typography
+                                    component="h1"
+                                    variant="body2"
+                                    color={message ? "primary" : "error"}
+                                >
+                                    {message ? (
+                                        <Box className={classes.registr}>
+                                            {history.push("/sign-in")}
+                                        </Box>
+
+                                    ) : (
+                                        ""
+                                    )}
+                                    {registrationError}
+                                </Typography>
+                            </Box>
+                            <form noValidate className={classes.form}>
+                                <Box className={classes.name}>
+                                    <TextField
+                                        onChange={handleName}
+                                        variant="outlined"
+                                        required
+                                        label="Имя"
+                                        autoComplete="имя"
+                                    />
                                 </Box>
 
-                            ) : (
-                                ""
-                            )}
-                            {registrationError}
-                        </Typography>
-                    </Box>
-                    <form noValidate>
-                        <Box className={classes.name}>
-                            <TextField
-                                onChange={handleName}
-                                variant="outlined"
-                                required
-                                label="Имя"
-                                autoComplete="имя"
-                            />
+                                <Grid  container spacing={3}>
+                                    <Grid className={classes.login} item={6}>
+                                        <TextField
+                                            onChange={handleLogin}
+                                            autoComplete
+                                            variant="outlined"
+                                            required
+                                            fullWidth
+                                            label="Логин"
+                                            autoFocus
+                                        />
+                                    </Grid>
+                                    <Grid item={6}>
+                                        <TextField
+                                            onChange={handlePassword}
+                                            variant="outlined"
+                                            required
+                                            fullWidth
+                                            label="Пароль"
+                                            autoComplete
+                                            type='password'
+                                        />
+                                    </Grid>
+                                </Grid>
+                                <Box className={classes.link}>
+                                    <Link href="/sign-in" variant="body2">
+                                        У вас уже есть аккаунт? Войти
+                                    </Link>
+                                </Box>
+                                <Box>
+                                    <Button
+                                        onClick={handleSubmit}
+                                        variant="contained"
+                                        color="primary"
+                                        className={classes.submit}
+                                    >
+                                        Зарегистрироваться
+                                    </Button>
+                                </Box>
+                            </form>
                         </Box>
-
-                        <Grid container spacing={2}>
-                            <Grid item={6}>
-                                <TextField
-                                    onChange={handleLogin}
-                                    autoComplete
-                                    variant="outlined"
-                                    required
-                                    fullWidth
-                                    label="Логин"
-                                    autoFocus
-                                />
-                            </Grid>
-                            <Grid item={6}>
-                                <TextField
-                                    onChange={handlePassword}
-                                    variant="outlined"
-                                    required
-                                    fullWidth
-                                    label="Пароль"
-                                    autoComplete
-                                    type='password'
-                                />
-                            </Grid>
-                        </Grid>
-                        <Box className={classes.link}>
-                            <Link href="/sign-in" variant="body2">
-                                У вас уже есть аккаунт? Войти
-                            </Link>
-                        </Box>
-                        <Box>
-                            <Button
-                                onClick={handleSubmit}
-                                variant="contained"
-                                color="primary"
-                                className={classes.submit}
-                            >
-                                Зарегистрироваться
-                            </Button>
-                        </Box>
-                    </form>
-            </Box>
-            </Paper>
-
-        </Container>
+                    </Paper>
+                </Grid>
+            </Grid>
     );
 };
 
