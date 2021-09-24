@@ -79,13 +79,13 @@ module.exports.captainController = {
       }
 
   },
-    getCaptions: async (req, res) => {
+    getCaptainById: async (req, res) => {
       try {
-       const  captions = await Captain.find()
+       const  captions = await Captain.findById(req.captain.id)
        res.status(200).json(captions)
       }
       catch (e) {
-          res.status(400).json(`Ошибка  при  получение  всех авторизованных  юзеров: ${e.toString()}`)
+          res.status(400).json( {error: `Ошибка  при  получение   авторизованного  капитана: ${e.toString()}`})
       }
     }
 };
