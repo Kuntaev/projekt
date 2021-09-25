@@ -36,11 +36,11 @@ function Header() {
       <img src="https://i.postimg.cc/D0V74z05/logo.png" className={classes.logo}/>
         </NavLink>
       <NavLink to="/" className={classes.navBar}>Главная</NavLink>
-      <NavLink to="/teams" className={classes.navBar}>Команды</NavLink>
+      <NavLink to="/team" className={classes.navBar}>Команды</NavLink>
       <NavLink to="/my-teams" className={classes.navBar}>Мои команды</NavLink>
       <NavLink to="/play" className={classes.navBar}>Назначить игру</NavLink>
       </div>
-      <NavLink to='/authorization' style={{color:'white', fontSize: 24}}>
+      <NavLink to='/sign-up' style={{color:'white', fontSize: 24}}>
         <i className="fas fa-user"></i>
       </NavLink>
     </div>
