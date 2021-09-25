@@ -5,14 +5,19 @@ const Captain = require("../models/Captain.model");
 module.exports.captainController = {
   registrationCaption: async (req, res) => {
     try {
-      const { login, password, name } = req.body;
+      const { login, password, name, surname, mail } = req.body;
       const hash = await bcrypt.hash(
         password,
         Number(process.env.BCRYPT_ROUNDS)
       );
-
+      if(!mail) {
+     res.status(401).json({registrationError: "Необходимо ввести почту"})
+      }
       if (!name) {
         res.status(401).json({ registrationError: "Необходимо ввести имя" });
+      }
+      if (!surname) {
+        res.status(401).json({ registrationError: "Необходимо ввести Фамилия" });
       }
       if (!login) {
         res
@@ -34,7 +39,9 @@ module.exports.captainController = {
 
       await Captain.create({
         name,
+        surname,
         login,
+        mail,
         password: hash,
       });
 

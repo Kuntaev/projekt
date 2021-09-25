@@ -12,7 +12,7 @@ app.use(fileUpload());
 app.use(cors());
 app.use(require("./routes/index"));
 app.use("/public/uploads/img", express.static(path.resolve(__dirname, "image")));
-
+console.log(process.env.MONGO_PORT, process.env.PORT)
 mongoose
   .connect(process.env.MONGO_PORT)
   .then(() => {

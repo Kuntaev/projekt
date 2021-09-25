@@ -69,9 +69,15 @@ export  default  function captainReducer(state = initialState, action) {
             return {
                 ...state,
                 loading: false,
-                 captain: action.payload
+                captain: action.payload
             }
 
+
+        case "captain/output/fulfilled":
+            return {
+                ...state,
+                token: null
+            }
         default:
             return state
     }
@@ -130,8 +136,9 @@ export const  getAuthorizationCaptain = () => {
         dispatch({type: "captain/load/pending"})
         const  state = getState()
         const  response = await fetch("http://localhost:3013/captain/personal", {
-            method: "GET",
-            Authorization: `Bearer ${state.captain.token}`,
+            headers: {
+                Authorization: `Bearer ${state.captain.token}`
+            },
         })
         const json = await  response.json()
         if(json.error) {
@@ -139,5 +146,12 @@ export const  getAuthorizationCaptain = () => {
         } else {
             dispatch({type: "captain/load/fulfilled", payload: json})
         }
+    }
+}
+
+export  const outputCaptain = () => {
+    return async (dispatch) => {
+        dispatch({type: "captain/output/fulfilled"})
+        localStorage.clear()
     }
 }
