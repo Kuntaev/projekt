@@ -22,6 +22,11 @@ export function team(state = initialState, action) {
         ...state,
         error:action.payload.error
       }
+    case "one/team/fulfilled":
+      return {
+        ...state,
+        loadOneT: action.payload
+      }
     default:
       return state;
   }
@@ -36,6 +41,17 @@ export const loadingTeams = () => {
       });
   };
 };
+
+export const loadOneTeam = (id) => {
+  console.log(id)
+  return async (dispatch) => {
+    await fetch(`/team/${id}`)
+    .then((res) => res.json())
+    .then((data) => {
+      dispatch({type: "one/team/fulfilled", payload: data})
+    })
+  }
+}
 
 export const addTeam = (text, image) => {
   return async (dispatch, getState) => {
