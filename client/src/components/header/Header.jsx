@@ -40,6 +40,7 @@ function Header() {
     dispatch(outputCaptain())
   }
   return (
+    <>
     <div className={classes.main}>
       <div className={classes.content}>
         <NavLink to="/" className={classes.navBar}>
@@ -52,7 +53,7 @@ function Header() {
         <NavLink to="/" className={classes.navBar}>
           Главная
         </NavLink>
-        <NavLink to="/teams" className={classes.navBar}>
+        <NavLink to="/team" className={classes.navBar}>
           Команды
         </NavLink>
         <NavLink to="/my-teams" className={classes.navBar}>
@@ -75,15 +76,17 @@ function Header() {
       {token ? (<Link to="/">
          <div onClick={handleOutput}>Выход</div>
           </Link>) : ("")}
-      <NavLink to="/" className={classes.navBar}>Главная</NavLink>
-      <NavLink to="/team" className={classes.navBar}>Команды</NavLink>
-      <NavLink to="/my-teams" className={classes.navBar}>Мои команды</NavLink>
-      <NavLink to="/play" className={classes.navBar}>Назначить игру</NavLink>
-      </div>
-      <NavLink to='/sign-up' style={{color:'white', fontSize: 24}}>
-        <i className="fas fa-user"></i>
-      </NavLink>
+    {/*  <NavLink to="/" className={classes.navBar}>Главная</NavLink>*/}
+    {/*  <NavLink to="/team" className={classes.navBar}>Команды</NavLink>*/}
+    {/*  <NavLink to="/my-teams" className={classes.navBar}>Мои команды</NavLink>*/}
+    {/*  <NavLink to="/play" className={classes.navBar}>Назначить игру</NavLink>*/}
+    {/*  </div>*/}
+    {/*<div>*/}
+    {/*  <NavLink to='/sign-up' style={{color:'white', fontSize: 24}}>*/}
+    {/*    <i className="fas fa-user"></i>*/}
+    {/*  </NavLink>*/}
     </div>
+    </>
   );
 }
 
