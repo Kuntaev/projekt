@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { addTeam, loadingTeams } from "../../redux/features/Team";
+import { loadingTeams, loadOneTeam } from "../../redux/features/team";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Container, Grid } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
+import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles({
   container: {
-
   },
   main: {
     flexGrow: 0,
@@ -31,35 +31,40 @@ const useStyles = makeStyles({
     fontSize: 20,
     color: 'red',
     textAlign: 'center'
+  },
+  modal: {
+
   }
 
 })
 
 const Teams = () => {
-  const [text, setText] = useState("");
-  const { loadTeam } = useSelector((state) => state.team);
   const dispatch = useDispatch();
-
-  const classes = useStyles()
 
   useEffect(() => {
     dispatch(loadingTeams());
-  }, []);
+  }, [dispatch]);
+
+  const { loadTeam } = useSelector((state) => state.team);
+
+  const classes = useStyles()
+
   return (
     <>
       <Container className={classes.container}>
         <Grid container className={classes.main} spacing={5}>
           {loadTeam?.map((item) => {
             return (
-              <Grid item xs={3} >
-                <a href="https://www.fcbarcelona.com/en/">
-                  <Box className={classes.inner}>
+              <Grid item xs={3}>
+                <NavLink to={`/team/${item._id}`}>
+                  <Box  variant="outlined" className={classes.inner}>
                     <Box className={classes.image}>
                       <img className={classes.image} src={item.image}/>
                     </Box>
                     <Box className={classes.name}>{item.name}</Box>
                   </Box>
-                </a>
+                </NavLink>
+
               </Grid>
             );
           })}
