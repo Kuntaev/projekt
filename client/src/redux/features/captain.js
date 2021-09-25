@@ -52,6 +52,32 @@ export  default  function captainReducer(state = initialState, action) {
                 token: action.payload.token,
             }
 
+
+        case  "captain/load/pending":
+            return {
+                ...state,
+                loading: true,
+                error: null
+            }
+        case  "captain/load/rejected":
+            return {
+                ...state,
+                loading: false,
+                error: action.error
+            }
+        case  "captain/load/fulfilled":
+            return {
+                ...state,
+                loading: false,
+                captain: action.payload
+            }
+
+
+        case "captain/output/fulfilled":
+            return {
+                ...state,
+                token: null
+            }
         default:
             return state
     }
@@ -100,5 +126,32 @@ export const authorizationCaptain = (data) => {
             localStorage.setItem("token", json.token);
 
         }
+    }
+}
+
+
+
+export const  getAuthorizationCaptain = () => {
+    return async (dispatch, getState) => {
+        dispatch({type: "captain/load/pending"})
+        const  state = getState()
+        const  response = await fetch("http://localhost:3013/captain/personal", {
+            headers: {
+                Authorization: `Bearer ${state.captain.token}`
+            },
+        })
+        const json = await  response.json()
+        if(json.error) {
+            dispatch({type: "captain/load/rejected", error: json.error})
+        } else {
+            dispatch({type: "captain/load/fulfilled", payload: json})
+        }
+    }
+}
+
+export  const outputCaptain = () => {
+    return async (dispatch) => {
+        dispatch({type: "captain/output/fulfilled"})
+        localStorage.clear()
     }
 }

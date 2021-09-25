@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 
 const captainSchema = mongoose.Schema({
   name: String,
+  mail: String,
+  surname: String,
   login: {
     type: String,
     unique: true,

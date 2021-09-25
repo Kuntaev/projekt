@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 module.exports.authMiddleware = async (req, res, next) => {
+  console.log(req)
   const { authorization } = req.headers;
 
   if (!authorization) {
@@ -14,7 +15,7 @@ module.exports.authMiddleware = async (req, res, next) => {
   }
 
   try {
-    const payload = await jwt.verify(token, process.env.JWT_KEY);
+    req.captain =  jwt.verify(token, process.env.JWT_KEY);
     next();
   } catch (e) {
     res.status(401).json(`Неверный токен в authMiddlewares: ${e.toString()}`);
