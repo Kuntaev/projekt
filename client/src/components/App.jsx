@@ -18,20 +18,9 @@ const App = () => {
         <Route exact path="/">
           <Main/>
         </Route>
-        <Route  path="/teams">
-          <Teams/>
-        </Route>
-        <Route  path="/my-teams">
-          <MyTeam/>
-        </Route>
         <Route path="/personal/captain">
           <PersonalCaptain/>
         </Route>
-      </Switch>
-      <Route  path="/sign-in">
-        <SignInPage/>
-      </Route>
-      <Route  path="/sign-up">
         <Route exact path={"/team/:id"}>
           <OneTeam/>
         </Route>

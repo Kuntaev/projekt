@@ -4,6 +4,7 @@ const initialState = {
     registrationError: null,
     authorizationError: null,
     captain: null,
+    candidate: null,
     token: localStorage.getItem("token")
 }
 
@@ -27,7 +28,7 @@ export  default  function captainReducer(state = initialState, action) {
                 ...state,
                 loading: false,
                 registrationError: null,
-                message: action.payload.message
+                message: action.payload.message,
             }
 
 
@@ -50,6 +51,7 @@ export  default  function captainReducer(state = initialState, action) {
                 loading: false,
                 authorizationError: null,
                 token: action.payload.token,
+                candidate: action.payload.candidate
             }
 
 
