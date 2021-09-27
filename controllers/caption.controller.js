@@ -5,19 +5,24 @@ const Captain = require("../models/Captain.model");
 module.exports.captainController = {
   registrationCaption: async (req, res) => {
     try {
-      const { login, password, name, surname, mail } = req.body;
+      const { login, password, name, surname, mail, avatar, eventId } = req.body;
       const hash = await bcrypt.hash(
         password,
         Number(process.env.BCRYPT_ROUNDS)
       );
-      if(!mail) {
-     res.status(401).json({registrationError: "Необходимо ввести почту"})
+      // if (!avatar) {
+      //   res.status(401).json({ registrationError: "Необходимо ввести ссылку на аватарку" });
+      // }
+      if (!mail) {
+        res.status(401).json({ registrationError: "Необходимо ввести почту" });
       }
       if (!name) {
         res.status(401).json({ registrationError: "Необходимо ввести имя" });
       }
       if (!surname) {
-        res.status(401).json({ registrationError: "Необходимо ввести Фамилия" });
+        res
+          .status(401)
+          .json({ registrationError: "Необходимо ввести Фамилия" });
       }
       if (!login) {
         res
@@ -41,6 +46,8 @@ module.exports.captainController = {
         name,
         surname,
         login,
+        eventId,
+        avatar,
         mail,
         password: hash,
       });
@@ -53,46 +60,61 @@ module.exports.captainController = {
     }
   },
   authorizationCaptain: async (req, res) => {
-      try {
-          const { login, password } = req.body;
-          const candidate = await Captain.findOne({ login });
+    try {
+      const { login, password } = req.body;
+      const candidate = await Captain.findOne({ login });
 
-          if (login.length === 0) {
-              res.status(401).json({ authorizationError: "необходимо ввести логин" });
-          }
-          if (password.length === 0) {
-              res.status(401).json({ authorizationError: "необходимо ввести пароль" });
-          }
-          if (!candidate) {
-              res.status(401).json({ authorizationError: "неверный логин" });
-          }
-          const valid = await bcrypt.compare(password, candidate.password);
-          if (!valid) {
-              res.status(401).json({ authorizationError: "неверный пароль" });
-          }
-
-          const payload = {
-              id: candidate.id,
-          };
-
-          const token =  jwt.sign(payload, process.env.JWT_KEY, {
-              expiresIn: "24h"
-          })
-
-          res.status(200).json({token})
+      if (login.length === 0) {
+        res.status(401).json({ authorizationError: "необходимо ввести логин" });
       }
-      catch (e) {
-          res.status(400).json(`Ошибка при  регистрации: ${e.toString()}`)
+      if (password.length === 0) {
+        res
+          .status(401)
+          .json({ authorizationError: "необходимо ввести пароль" });
+      }
+      if (!candidate) {
+        res.status(401).json({ authorizationError: "неверный логин" });
+      }
+      const valid = await bcrypt.compare(password, candidate.password);
+      if (!valid) {
+        res.status(401).json({ authorizationError: "неверный пароль" });
       }
 
-  },
-    getCaptainById: async (req, res) => {
-      try {
-       const  captions = await Captain.findById(req.captain.id)
-       res.status(200).json(captions)
-      }
-      catch (e) {
-          res.status(400).json( {error: `Ошибка  при  получение   авторизованного  капитана: ${e.toString()}`})
-      }
+      const payload = {
+        id: candidate._id,
+      };
+
+      const token = jwt.sign(payload, process.env.JWT_KEY, {
+        expiresIn: "24h",
+      });
+
+      res.status(200).json({ token });
+    } catch (e) {
+      res.status(400).json(`Ошибка при  регистрации: ${e.toString()}`);
     }
+  },
+  getCaptainById: async (req, res) => {
+    try {
+      const captions = await Captain.findById(req.captain.id);
+      res.status(200).json(captions);
+    } catch (e) {
+      res
+        .status(400)
+        .json({
+          error: `Ошибка  при  получение   авторизованного  капитана: ${e.toString()}`,
+        });
+    }
+  },
+
+  removeAccount: async (req, res) => {
+    try {
+      const captain = await Captain.findById(req.captain.id);
+      await Captain.findByIdAndDelete(captain);
+      res.json({ message: "ваш аккаунт успешно удален" });
+    } catch (e) {
+      res
+        .status(400)
+        .json({ error: `Ошибка при удаления капитан ${e.toString()}` });
+    }
+  },
 };

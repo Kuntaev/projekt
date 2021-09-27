@@ -3,7 +3,7 @@ const initialState = {
     message: null,
     registrationError: null,
     authorizationError: null,
-    captain: null,
+    captain: [],
     candidate: null,
     token: localStorage.getItem("token")
 }
@@ -68,10 +68,11 @@ export  default  function captainReducer(state = initialState, action) {
                 error: action.error
             }
         case  "captain/load/fulfilled":
+            console.log(action.payload)
             return {
                 ...state,
                 loading: false,
-                captain: action.payload
+                captain: [action.payload]
             }
 
 
@@ -79,6 +80,26 @@ export  default  function captainReducer(state = initialState, action) {
             return {
                 ...state,
                 token: null
+            }
+
+
+
+        case  "captain/delete/pending":
+            return {
+                ...state,
+                loading: true,
+            }
+        case   "captain/delete/rejected":
+            return {
+              ...state,
+                loading: false,
+                error: action.error
+            }
+        case   "captain/delete/fulfilled":
+            return {
+             ...state,
+             loading: false,
+             token: null
             }
         default:
             return state
@@ -89,6 +110,7 @@ export  default  function captainReducer(state = initialState, action) {
 
 
 export  const  registrationCaptain = (data) => {
+    console.log(data)
 
   return async (dispatch) => {
       dispatch({type: "caption/sign-up/pending"})
@@ -147,6 +169,7 @@ export const  getAuthorizationCaptain = () => {
             dispatch({type: "captain/load/rejected", error: json.error})
         } else {
             dispatch({type: "captain/load/fulfilled", payload: json})
+
         }
     }
 }
@@ -155,5 +178,26 @@ export  const outputCaptain = () => {
     return async (dispatch) => {
         dispatch({type: "captain/output/fulfilled"})
         localStorage.clear()
+    }
+}
+
+
+export  const deleteAccount = () => {
+    return async (dispatch, getState) => {
+        dispatch({type: "captain/delete/pending"})
+        const state = getState()
+        const response = await fetch("http://localhost:3013/captain/delete", {
+            method: "DELETE",
+            headers : {
+                Authorization:`Bearer ${state.captain.token}`
+            }
+        })
+        const json = response.json()
+        if(json.error) {
+            dispatch({type:"captain/delete/rejected", payload: json.error})
+        } else {
+            dispatch({type:"captain/delete/fulfilled", payload: json})
+            localStorage.clear()
+        }
     }
 }
