@@ -7,5 +7,6 @@ const router = Router()
 router.post("/registration", captainController.registrationCaption)
 router.post("/authorization", captainController.authorizationCaptain)
 router.get("/captain/personal", authMiddleware, captainController.getCaptainById)
+router.delete("/captain/delete", authMiddleware, captainController.removeAccount);
 
 module.exports = router

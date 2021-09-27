@@ -58,6 +58,7 @@ const SignUpPage = () => {
   const [password, setPassword] = useState("");
   const [surname, setSurname] = useState("");
   const [mail, setMail] = useState("");
+  const [avatar, setAvatar] = useState("")
 
   const loading = useSelector((state) => state.captain.loading);
   const message = useSelector((state) => state.captain.message);
@@ -79,8 +80,11 @@ const SignUpPage = () => {
   const handleMail = (e) => {
     setMail(e.target.value);
   };
+  const handleAvatar = (e) => {
+    setAvatar(e.target.value)
+  }
   const handleSubmit = () => {
-    dispatch(registrationCaptain({ name, login, password, surname, mail }));
+    dispatch(registrationCaptain({ name, login, password, surname, mail, avatar }));
   };
 
   return (
@@ -88,7 +92,7 @@ const SignUpPage = () => {
       <Grid className={classes.gridMain}>
         <Paper className={classes.paper} elevation={5}>
           <Box className={classes.main}>
-            <Box className={classes.nname}>
+            <Box>
               <Typography component="p" variant="h5">
                 Регистрация
               </Typography>
@@ -112,14 +116,29 @@ const SignUpPage = () => {
               </Typography>
             </Box>
             <form noValidate className={classes.form}>
-              <Box>
-                <TextField
-                  onChange={handleMail}
-                  variant="outlined"
-                  required
-                  label="Почта"
-                />
-              </Box>
+              <Grid className={classes.data} container spacing={2}>
+                <Grid item={4}>
+                  <Box>
+                    <TextField
+                      onChange={handleMail}
+                      variant="outlined"
+                      required
+                      label="Почта"
+                    />
+                  </Box>
+                </Grid>
+                <Grid item={4}>
+                  <Box>
+                    <TextField
+                      onChange={handleAvatar}
+                      variant="outlined"
+                      required
+                      label="Фото"
+                    />
+                  </Box>
+                </Grid>
+              </Grid>
+
 
               <Grid className={classes.data} container spacing={2}>
                 <Grid item={4}>
