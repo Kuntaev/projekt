@@ -72,7 +72,7 @@ export  default  function captainReducer(state = initialState, action) {
             return {
                 ...state,
                 loading: false,
-                captain: [action.payload]
+                captain: action.payload
             }
 
 
@@ -101,6 +101,18 @@ export  default  function captainReducer(state = initialState, action) {
              loading: false,
              token: null
             }
+
+
+        case "avatar/create/fulfilled":
+            return {
+                ...state,
+                loading: false,
+                captain: {
+                    ...state.captain,
+                    avatar: action.payload
+                },
+            };
+
         default:
             return state
     }
@@ -181,6 +193,26 @@ export  const outputCaptain = () => {
     }
 }
 
+export const uploadAvatar = (file) => {
+    return async (dispatch, getState) => {
+        const state = getState();
+        try {
+            const formData = new FormData();
+            formData.append("file", file);
+            const response = await fetch("http://localhost:3013/captain/personal/avatar", {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${state.captain.token}`,
+                },
+                body: formData,
+            });
+            const json = await response.json();
+            dispatch({ type: "avatar/create/fulfilled", payload: json.avatar });
+        } catch (e) {
+            console.log(e.message);
+        }
+    };
+};
 
 export  const deleteAccount = () => {
     return async (dispatch, getState) => {

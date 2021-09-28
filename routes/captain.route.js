@@ -8,5 +8,6 @@ router.post("/registration", captainController.registrationCaption)
 router.post("/authorization", captainController.authorizationCaptain)
 router.get("/captain/personal", authMiddleware, captainController.getCaptainById)
 router.delete("/captain/delete", authMiddleware, captainController.removeAccount);
+router.post("/captain/personal/avatar", authMiddleware, captainController.addAvatar)
 
 module.exports = router
