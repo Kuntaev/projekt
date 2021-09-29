@@ -1,11 +1,12 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Captain = require("../models/Captain.model");
-const path = require("path")
+const path = require("path");
 module.exports.captainController = {
   registrationCaption: async (req, res) => {
     try {
-      const { login, password, name, surname, mail, avatar, eventId } = req.body;
+      const { login, password, name, surname, mail, avatar, eventId } =
+        req.body;
       const hash = await bcrypt.hash(
         password,
         Number(process.env.BCRYPT_ROUNDS)
@@ -98,14 +99,11 @@ module.exports.captainController = {
       const captions = await Captain.findById(req.captain.id);
       res.status(200).json(captions);
     } catch (e) {
-      res
-        .status(400)
-        .json({
-          error: `Ошибка  при  получение   авторизованного  капитана: ${e.toString()}`,
-        });
+      res.status(400).json({
+        error: `Ошибка  при  получение   авторизованного  капитана: ${e.toString()}`,
+      });
     }
   },
-
 
   //
   // addAvatar: async (req, res) => {
@@ -142,4 +140,22 @@ module.exports.captainController = {
     }
   },
 
+  editProfile: async (req, res) => {
+    try {
+      const { name, surname } = req.body;
+      const id = req.captain.id;
+      const options = { new: true };
+
+      const pathCaptainById = await Captain.findByIdAndUpdate(
+        id,
+        { name, surname },
+        options
+      );
+      res.json(pathCaptainById);
+    } catch (e) {
+      res
+        .status(400)
+        .json({ error: `Ошибка при изменения профиля ${e.toString()}` });
+    }
+  },
 };
