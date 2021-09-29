@@ -1,3 +1,4 @@
+import MyTeamOne from './team/MyTeamOne';
 import React, { useState } from "react";
 import Main from "./main/Main";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
@@ -21,6 +22,9 @@ const App = () => {
         </Route>
         <Route exact path={"/team/:id"}>
           <OneTeam />
+        </Route>
+        <Route exact path={"/my-teams/:id"}>
+          <MyTeamOne/>
         </Route>
         <Route exact path="/team">
           <Teams />

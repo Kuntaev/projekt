@@ -28,13 +28,12 @@ const OneTeam = (props) => {
 
   return (
     <div>
-      <Box>
-          <img className={classes.image} src={loadOneT?.image}/>
-      </Box>
-      <Typography>
-        {loadOneT?.name}
-      </Typography>
-
+          <Box>
+            <img className={classes.image} src={loadOneT?.image}/>
+          </Box>
+          <Typography>
+            {loadOneT?.name}
+          </Typography>
     </div>
   );
 };
