@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import Main from './main/Main';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
@@ -8,38 +9,50 @@ import SignUpPage from './auth/SignUpPage';
 import PersonalCaptain from './personalArea/PersonalCaptain';
 import OneTeam from './team/OneTeam';
 import MyTeamOne from './team/MyTeamOne';
+=======
+import React, { useState } from "react";
+import Main from "./main/Main";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import MyTeam from "./team/MyTeam";
+import Teams from "./team/Teams";
+import SignInPage from "./auth/SignInPage";
+import SignUpPage from "./auth/SignUpPage";
+
+import PersonalCaptain from "./personalArea/PersonalCaptain";
+import OneTeam from "./team/OneTeam";
+>>>>>>> main
 
 const App = () => {
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <Main/>
+          <Main />
         </Route>
         <Route path="/personal/captain">
-          <PersonalCaptain/>
+          <PersonalCaptain />
         </Route>
         <Route exact path={"/team/:id"}>
-          <OneTeam/>
+          <OneTeam />
         </Route>
         <Route exact path={"/my-teams/:id"}>
           <MyTeamOne/>
         </Route>
         <Route exact path="/team">
-          <Teams/>
+          <Teams />
         </Route>
         <Route exact path="/my-teams">
-          <MyTeam/>
+          <MyTeam />
         </Route>
         <Route exact path="/">
-          <Main/>
+          <Main />
         </Route>
       </Switch>
       <Route exact path="/sign-in">
-        <SignInPage/>
+        <SignInPage />
       </Route>
       <Route exact path="/sign-up">
-        <SignUpPage/>
+        <SignUpPage />
       </Route>
     </BrowserRouter>
   );

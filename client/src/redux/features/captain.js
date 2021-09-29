@@ -3,7 +3,7 @@ const initialState = {
     message: null,
     registrationError: null,
     authorizationError: null,
-    captain: null,
+    captain: [],
     candidate: null,
     token: localStorage.getItem("token")
 }
@@ -68,6 +68,7 @@ export  default  function captainReducer(state = initialState, action) {
                 error: action.error
             }
         case  "captain/load/fulfilled":
+            console.log(action.payload)
             return {
                 ...state,
                 loading: false,
@@ -80,6 +81,38 @@ export  default  function captainReducer(state = initialState, action) {
                 ...state,
                 token: null
             }
+
+
+
+        case  "captain/delete/pending":
+            return {
+                ...state,
+                loading: true,
+            }
+        case   "captain/delete/rejected":
+            return {
+              ...state,
+                loading: false,
+                error: action.error
+            }
+        case   "captain/delete/fulfilled":
+            return {
+             ...state,
+             loading: false,
+             token: null
+            }
+
+
+        case "avatar/create/fulfilled":
+            return {
+                ...state,
+                loading: false,
+                captain: {
+                    ...state.captain,
+                    avatar: action.payload
+                },
+            };
+
         default:
             return state
     }
@@ -89,6 +122,7 @@ export  default  function captainReducer(state = initialState, action) {
 
 
 export  const  registrationCaptain = (data) => {
+    console.log(data)
 
   return async (dispatch) => {
       dispatch({type: "caption/sign-up/pending"})
@@ -147,6 +181,7 @@ export const  getAuthorizationCaptain = () => {
             dispatch({type: "captain/load/rejected", error: json.error})
         } else {
             dispatch({type: "captain/load/fulfilled", payload: json})
+
         }
     }
 }
@@ -155,5 +190,46 @@ export  const outputCaptain = () => {
     return async (dispatch) => {
         dispatch({type: "captain/output/fulfilled"})
         localStorage.clear()
+    }
+}
+
+export const uploadAvatar = (file) => {
+    return async (dispatch, getState) => {
+        const state = getState();
+        try {
+            const formData = new FormData();
+            formData.append("file", file);
+            const response = await fetch("http://localhost:3013/captain/personal/avatar", {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${state.captain.token}`,
+                },
+                body: formData,
+            });
+            const json = await response.json();
+            dispatch({ type: "avatar/create/fulfilled", payload: json.avatar });
+        } catch (e) {
+            console.log(e.message);
+        }
+    };
+};
+
+export  const deleteAccount = () => {
+    return async (dispatch, getState) => {
+        dispatch({type: "captain/delete/pending"})
+        const state = getState()
+        const response = await fetch("http://localhost:3013/captain/delete", {
+            method: "DELETE",
+            headers : {
+                Authorization:`Bearer ${state.captain.token}`
+            }
+        })
+        const json = response.json()
+        if(json.error) {
+            dispatch({type:"captain/delete/rejected", payload: json.error})
+        } else {
+            dispatch({type:"captain/delete/fulfilled", payload: json})
+            localStorage.clear()
+        }
     }
 }
