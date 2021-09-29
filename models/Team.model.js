@@ -6,6 +6,10 @@ const teamSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Event"
   },
+  captain: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Captain"
+  },
   image: String,
 })
 
