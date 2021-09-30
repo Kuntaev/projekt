@@ -8,9 +8,22 @@ import { makeStyles } from '@material-ui/core/styles';
 import HeaderBlack from '../header/HeaderBlack';
 
 const useStyles = makeStyles({
+  main: {
+    display: 'flex'
+  },
   image: {
-    width: 200,
-
+    marginTop: 50,
+    marginLeft: 150,
+    width: 400,
+  },
+  teamName: {
+    fontSize: 40
+  },
+  captain: {
+    display: 'flex',
+  },
+  name: {
+    marginRight: 5
   }
 })
 
@@ -28,16 +41,27 @@ const OneTeam = (props) => {
   useEffect(() => {
     dispatch(loadOneTeam(id));
   }, [id, dispatch]);
+  console.log(loadOneT)
 
   return (
     <div>
       <HeaderBlack/>
-          <Box>
-            <img className={classes.image} src={loadOneT?.image}/>
-          </Box>
-          <Typography>
+      <Box className={classes.main}>
+        <Box>
+          <img className={classes.image} src={loadOneT?.image}/>
+          <Typography className={classes.teamName}>
             {loadOneT?.name}
           </Typography>
+        </Box>
+      <Box className={classes.captain}>
+        <Typography className={classes.name}>
+          Капитан команды: {loadOneT?.captain.name}
+        </Typography>
+        <Typography>
+          {loadOneT?.captain.surname}
+        </Typography>
+      </Box>
+      </Box>
     </div>
   );
 };

@@ -69,6 +69,7 @@ export const loadOneTeam = (id) => {
     await fetch(`/team/${id}`)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data)
         dispatch({ type: "one/team/fulfilled", payload: data });
       });
   };
