@@ -160,12 +160,18 @@ export const deleteTeam = (id) => {
   }
 };
 
-export const editTeam = (id) => {
+export const editTeam = (id, text, image) => {
+  console.log(id)
   return async (dispatch, getState) => {
     const state = getState()
     await fetch(`/my-teams/${id}`, {
       method: "PATCH",
+      body: JSON.stringify({
+        name: text,
+        image: image,
+      }),
       headers:{
+        "Content-type": "application/json",
         Authorization: `Bearer ${state.captain.token}`,
       }
     })
