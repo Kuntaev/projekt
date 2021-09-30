@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Box, Container, Grid } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import { NavLink } from 'react-router-dom';
+import HeaderBlack from '../header/HeaderBlack';
 
 const useStyles = makeStyles({
   container: {
@@ -51,6 +52,7 @@ const Teams = () => {
 
   return (
     <>
+      <HeaderBlack/>
       <Container className={classes.container}>
         <Grid container className={classes.main} spacing={5}>
           {loadTeam?.map((item) => {
@@ -64,7 +66,6 @@ const Teams = () => {
                     <Box className={classes.name}>{item.name}</Box>
                   </Box>
                 </NavLink>
-
               </Grid>
             );
           })}

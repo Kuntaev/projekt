@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   },
   navBar: {
     textDecoration: "none",
-    color: "white",
+    color: "black",
     fontSize: 16,
     fontFamily: "Roboto",
     fontWeight: "bold",
@@ -37,7 +37,7 @@ const useStyles = makeStyles({
   }
 });
 
-function Header() {
+function HeaderBlack() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -52,7 +52,7 @@ function Header() {
         <div className={classes.content}>
           <NavLink to="/" className={classes.navBar}>
             <img
-              src="https://i.postimg.cc/D0V74z05/logo.png"
+              src="https://i.postimg.cc/pVFgPJv5/fdfdf.png"
               className={classes.logo}
               alt=""
             />
@@ -76,20 +76,13 @@ function Header() {
             Личный кабинет
           </NavLink>
         ) : (
-          <NavLink to="/sign-in" style={{ color: "white", fontSize: 24 }}>
+          <NavLink to="/sign-in" style={{ color: "black", fontSize: 24 }}>
             <i className="fas fa-user"/>
           </NavLink>
         )}
-        {/*{token ? (*/}
-        {/*  // <Link  className={classes.personalArea} to="/">*/}
-        {/*  //   <div  onClick={handleOutput}>Выход</div>*/}
-        {/*  // </Link>*/}
-        {/*) : (*/}
-        {/*  ""*/}
-        {/*)}*/}
       </div>
     </>
   );
 }
 
-export default Header;
+export default HeaderBlack;

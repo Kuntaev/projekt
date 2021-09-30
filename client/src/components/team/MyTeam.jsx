@@ -11,6 +11,7 @@ import {
 import { Button, Dialog, DialogActions } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { NavLink } from "react-router-dom";
+import HeaderBlack from '../header/HeaderBlack';
 
 const useStyles = makeStyles({
   main: {
@@ -99,13 +100,13 @@ const MyTeam = () => {
 
   return (
     <>
+      <HeaderBlack/>
       <Box>
         <Box className={classes.createTeam}>
           <Button variant="outlined" onClick={handleClickOpen}>
             Создать команду
           </Button>
         </Box>
-
         <div>
           <Dialog open={open} onClose={handleClose}>
             <DialogActions>
