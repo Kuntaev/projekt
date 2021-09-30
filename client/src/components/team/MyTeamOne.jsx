@@ -85,7 +85,7 @@ const MyTeamOne = () => {
     setOpenAdd(true);
   };
   const handleAddPlayer = (e) => {
-    if(players.length > 10 || player.name === "" || player.lastname === "") {
+    if(player.name === "" || player.lastname === "") {
        return null
     }   else {
       e.preventDefault();
