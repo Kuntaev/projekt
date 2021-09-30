@@ -104,21 +104,17 @@ export default function captainReducer(state = initialState, action) {
         },
       };
 
-
-
     case "captain/edit/pending":
-          return {
-              ...state,
-            loading: true,
-
-          };
-      case "captain/edit/fulfilled":
-          return {
-
-              ...state,
-              captain: action.payload,
-            loading: false
-          };
+      return {
+        ...state,
+        loading: true,
+      };
+    case "captain/edit/fulfilled":
+      return {
+        ...state,
+        captain: action.payload,
+        loading: false,
+      };
 
     default:
       return state;
@@ -251,9 +247,7 @@ export const editCaptainById = (data) => {
       },
       body: JSON.stringify(data),
     });
-      const json = await response.json()
-      dispatch({ type: "captain/edit/fulfilled", payload: json});
-
+    const json = await response.json();
+    dispatch({ type: "captain/edit/fulfilled", payload: json });
   };
 };
-

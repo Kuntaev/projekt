@@ -68,10 +68,11 @@ module.exports.teamsController = {
   },
   editTeam: async (req, res) => {
     try {
-      await Team.findOneAndUpdate(req.params.id, req.body);
-      res.json("Команда изменена");
+      const team = await Team.findByIdAndUpdate(req.params.id, req.body);
+      console.log(req.params.id)
+      res.json(team);
     } catch (e) {
-      res.json("ошибка при изменений " + e);
+      res.json("ошибка при изменении " + e);
     }
   },
   deleteTeam: async (req, res) => {
