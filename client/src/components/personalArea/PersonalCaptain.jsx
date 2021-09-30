@@ -22,6 +22,7 @@ import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import { Link, useHistory } from "react-router-dom";
 import EditIcon from "@material-ui/icons/Edit";
+import HomeIcon from '@material-ui/icons/Home';
 import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles({
@@ -80,7 +81,6 @@ const useStyles = makeStyles({
   BoxSave: {
     display: "flex",
     justifyContent: "space-evenly",
-
     marginTop: "20px",
 
   },
@@ -94,7 +94,7 @@ const useStyles = makeStyles({
     alignItems: "center"
   },
   modalProfile: {
-    margin: "49px 523px 100px ",
+    margin: "49px 516px 100px ",
   },
   close: {
     fontSize: "18px",
@@ -112,6 +112,8 @@ const PersonalCaptain = () => {
   const [open, setOpen] = React.useState(false);
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
+  const [mail, setMail] = useState("")
+  const [avatar, setAvatar] = useState("")
 
   useEffect(() => {
     dispatch(getAuthorizationCaptain());
@@ -127,8 +129,11 @@ const PersonalCaptain = () => {
   const handleEditSurname = (e) => {
     setSurname(e.target.value);
   };
+  const handleEditMail = (e) => {
+    setMail(e.target.value);
+  };
   const handleEdit = () => {
-    dispatch(editCaptainById({ name, surname }));
+    dispatch(editCaptainById({ name, surname, mail, avatar}));
   };
   const handleDelete = () => {
     dispatch(deleteAccount());
@@ -137,8 +142,9 @@ const PersonalCaptain = () => {
   const handleOutput = () => {
     dispatch(outputCaptain());
   };
-
-
+  const handleEditAvatar = (e) => {
+       setAvatar(e.target.value)
+  }
   return (
     <Container className={classes.img}>
       <Grid className={classes.area} container spacing={5}>
@@ -246,7 +252,7 @@ const PersonalCaptain = () => {
         <Fade in={open}>
           <Paper className={classes.editPaper}>
             <Grid  className={classes.modal} container spacing={4}>
-              <Grid item={5}>
+              <Grid item={3}>
                 <TextField
                   onChange={handleEditName}
                   value={name}
@@ -255,13 +261,31 @@ const PersonalCaptain = () => {
                   label="Имя"
                 />
               </Grid>
-              <Grid item={5}>
+              <Grid item={3}>
                 <TextField
                   onChange={handleEditSurname}
                   value={surname}
                   variant="outlined"
                   required
                   label="Фамилия"
+                />
+              </Grid>
+              <Grid item={3}>
+                <TextField
+                  onChange={handleEditMail}
+                  value={mail}
+                  variant="outlined"
+                  required
+                  label="Почта"
+                />
+              </Grid>
+              <Grid item={3}>
+                <TextField
+                  onChange={handleEditAvatar}
+                  value={avatar}
+                  variant="outlined"
+                  required
+                  label="фото"
                 />
               </Grid>
             </Grid>
