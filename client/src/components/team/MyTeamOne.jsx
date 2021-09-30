@@ -11,17 +11,27 @@ import HeaderBlack from '../header/HeaderBlack';
 const useStyles = makeStyles({
   image: {
     width: 200,
+  },
+  backgroudPaper:  {
+    margin: "100px 400px 100px",
+    width: "400px",
+    height: "300px"
+  },
+  btn: {
+    margin: "30px 0"
   }
 })
 
 const MyTeamOne = () => {
 
   const classes = useStyles()
-
+  const [openAdd, setOpenAdd] = React.useState(false);
   const [open, setOpen] = React.useState(false);
 
   const [text, setText] = useState("");
   const [image, setImage] = useState("");
+
+  const  [players, setPlayers] = useState({})
 
   const dispatch = useDispatch()
   const { loadOneMyT } = useSelector((state) => state.team )
@@ -33,6 +43,10 @@ const MyTeamOne = () => {
 
   const handleClickOpen = () => {
     setOpen(true);
+  };
+  const handleAddClose = () => {
+    setOpenAdd(false);
+
   };
 
   const handleEditName = (e) => {
@@ -52,6 +66,9 @@ const MyTeamOne = () => {
   const handleClickEdit = (id) => {
     setOpen(true);
     dispatch(editTeam(id, text, image))
+  }
+  const handleClickAdd = () => {
+    setOpenAdd(true)
   }
 
   return (
@@ -96,10 +113,46 @@ const MyTeamOne = () => {
       <Typography>
         {loadOneMyT?.name}
       </Typography>
-      <Button onClick={handleClickEdit}>
+      <Button style={{backgroundColor: "primary"}} onClick={handleClickEdit}>
         Изменить
       </Button>
-      <Button>
+
+
+      <Dialog className={classes.backgroudPaper} open={openAdd} onClose={handleAddClose}>
+        <DialogActions>
+          <div>
+            <TextField
+              id="outlined-multiline-static"
+              label="Введите имя игрока"
+              multiline
+              rows={1}
+
+              variant="outlined"
+            />
+            <Box className={classes.btn}>
+              <TextField
+                id="outlined-multiline-static"
+                label="Введите имя игрока"
+                multiline
+                rows={1}
+                // value={image}
+                // onChange={handleEditImage}
+                variant="outlined"
+              />
+            </Box>
+            <div>
+              <Button
+                label="Введите имя игрока"
+                onClick={handleAddClose}
+                variant="contained"
+              >
+                Добавить игрока
+              </Button>
+            </div>
+          </div>
+        </DialogActions>
+      </Dialog>
+      <Button onClick={handleClickAdd}>
         Добавить игрока
       </Button>
     </div>
