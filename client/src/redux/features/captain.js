@@ -64,7 +64,6 @@ export default function captainReducer(state = initialState, action) {
         error: action.error,
       };
     case "captain/load/fulfilled":
-      console.log(action.payload);
       return {
         ...state,
         loading: false,

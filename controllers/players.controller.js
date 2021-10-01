@@ -52,5 +52,26 @@ module.exports.playersController = {
     } catch (e) {
       res.json("ошибка при удалении" + e)
     }
-  }
+  },
+  CaptainAddPlayer: async (req, res) => {
+    try {
+      const  {name, lastname} = req.body
+      if(!name) {
+        res.status(401).json({errorPlayer: "Введите имя игрока!"})
+      }
+      if(!lastname) {
+        res.status(401).json({errorPlayer: "Введите фамилию  игрока!"})
+      }
+     const player = await Player.create({
+        name,
+        lastname
+      })
+      res.status(200).json({player})
+    } catch (e) {
+      res.status(400).json(`ошибка при добавления игрока ${e.toString()}`)
+    }
+  },
+
+
+
 }

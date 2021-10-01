@@ -3,7 +3,7 @@ import {Box, Button, Dialog, DialogActions, Paper, TextField} from '@material-ui
 import Typography from '@material-ui/core/Typography';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { editTeam, loadOneMyTeam } from '../../redux/features/team';
+import {captainPlayerAdd, editTeam, loadOneMyTeam} from '../../redux/features/team';
 import { makeStyles } from '@material-ui/core/styles';
 import HeaderBlack from '../header/HeaderBlack';
 
@@ -44,6 +44,9 @@ const MyTeamOne = () => {
   const [text, setText] = useState("");
   const [image, setImage] = useState("");
 
+  const [name, setName] = useState("");
+  const [lastname, setLastname] = useState("");
+
   const dispatch = useDispatch()
   const { loadOneMyT } = useSelector((state) => state.team )
   const {id} = useParams()
@@ -79,8 +82,8 @@ const MyTeamOne = () => {
   }
 
 
-  /////Addd
 
+////Modal Add player
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -90,21 +93,22 @@ const MyTeamOne = () => {
   const handlePlayerClose = () => {
     setOpenAdd(false)
   }
-  const handleAddPlayer = (e) => {
-    if(player.name === "" || player.lastname === "") {
-      return null
-    }   else {
-      e.preventDefault();
-      setPlayers([...players, {...player, id: Date.now()}]);
-      setPlayer({name: "", lastname: ""})
-    }
-  }
   const handleAddClose = () => {
     setOpenAdd(false);
   }
-const handlePlayerRemove = (id) => {
-  setPlayers(players.filter( item => item.id !== id))
-}
+
+  const handleName = (e) => {
+     setName(e.target.value)
+  }
+  const handleLastname = (e) => {
+    setLastname(e.target.value)
+  }
+
+  const handlePlayerAdd = () => {
+      dispatch(captainPlayerAdd({name, lastname}))
+      setLastname("")
+      setName("")
+  }
 
   return (
     <div>
@@ -171,8 +175,8 @@ const handlePlayerRemove = (id) => {
         <DialogActions>
           <div>
             <TextField
-                value={player.name}
-                onChange={(e) => setPlayer({...player, name: e.target.value})}
+                onChange={handleName}
+                value={name}
                 id="outlined-multiline-static"
                 label="Введите имя игрока"
                 multiline
@@ -181,10 +185,11 @@ const handlePlayerRemove = (id) => {
             />
             <Box className={classes.btn}>
               <TextField
-                  value={player.lastname}
-                  onChange={(e) => setPlayer({...player, lastname: e.target.value})}
+                 onChange={handleLastname}
+                 value={lastname}
+
                   id="outlined-multiline-static"
-                  label="Введите имя игрока"
+                  label="Введите фамилию игрока"
                   multiline
                   rows={1}
                   variant="outlined"
@@ -192,8 +197,8 @@ const handlePlayerRemove = (id) => {
             </Box>
             <div>
               <Button
+                  onClick={handlePlayerAdd}
                   label="Введите имя игрока"
-                  onClick={handleAddPlayer}
                   variant="contained"
               >
                 Добавить
@@ -211,25 +216,7 @@ const handlePlayerRemove = (id) => {
       </Dialog>
       <Box>
         <Typography component="h1">Список игроков команды</Typography>
-        {players.map((item,) => {
-          return (
-              <>
-                <Paper className={classes.paperPlayer} elevation={5}>
-                  <Box>
-                    <Typography component="div" variant="h6"><b>Имя игрока</b>: {item.name}</Typography>
-                    <Typography component="div" variant="h6"><b>Фамилия игрока</b>: {item.lastname}</Typography>
-                    <Button
-                        onClick={ () => handlePlayerRemove(item.id)}
-                        variant="contained"
-                        style={{backgroundColor: "red"}}
-                    >
-                      Удалить
-                    </Button>
-                  </Box>
-                </Paper>
-              </>
-          )
-        })}
+
       </Box>
     </div>
   );
