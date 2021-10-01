@@ -22,7 +22,7 @@ import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import { Link, useHistory } from "react-router-dom";
 import EditIcon from "@material-ui/icons/Edit";
-import HomeIcon from '@material-ui/icons/Home';
+import HomeIcon from "@material-ui/icons/Home";
 import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles({
@@ -49,6 +49,7 @@ const useStyles = makeStyles({
   delete: {
     fontSize: "18px",
     marginTop: "10px",
+    marginLeft: "60px",
     color: "white",
   },
   dataRemove: {
@@ -82,7 +83,6 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "space-evenly",
     marginTop: "20px",
-
   },
   editPaper: {
     borderRadius: "10px 50px 10px 50px",
@@ -91,7 +91,7 @@ const useStyles = makeStyles({
   },
   modal: {
     marginLeft: "6px",
-    alignItems: "center"
+    alignItems: "center",
   },
   modalProfile: {
     margin: "49px 516px 100px ",
@@ -100,7 +100,7 @@ const useStyles = makeStyles({
     fontSize: "18px",
     color: "white",
     backgroundColor: "grey",
-  }
+  },
 });
 
 const PersonalCaptain = () => {
@@ -112,8 +112,8 @@ const PersonalCaptain = () => {
   const [open, setOpen] = React.useState(false);
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
-  const [mail, setMail] = useState("")
-  const [avatar, setAvatar] = useState("")
+  const [mail, setMail] = useState("");
+  const [avatar, setAvatar] = useState("");
 
   useEffect(() => {
     dispatch(getAuthorizationCaptain());
@@ -121,7 +121,7 @@ const PersonalCaptain = () => {
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const handleCloseButton = () => setOpen(false)
+  const handleCloseButton = () => setOpen(false);
 
   const handleEditName = (e) => {
     setName(e.target.value);
@@ -133,7 +133,7 @@ const PersonalCaptain = () => {
     setMail(e.target.value);
   };
   const handleEdit = () => {
-    dispatch(editCaptainById({ name, surname, mail, avatar}));
+    dispatch(editCaptainById({ name, surname, mail, avatar }));
   };
   const handleDelete = () => {
     dispatch(deleteAccount());
@@ -143,14 +143,14 @@ const PersonalCaptain = () => {
     dispatch(outputCaptain());
   };
   const handleEditAvatar = (e) => {
-       setAvatar(e.target.value)
-  }
+    setAvatar(e.target.value);
+  };
   return (
     <Container className={classes.img}>
       <Grid className={classes.area} container spacing={5}>
         <Grid item={6}>
           <Typography className={classes.text} variant="h5" component="span">
-            <b style={{ marginLeft: "80px"}}>Аватарка</b>
+            <b style={{ marginLeft: "80px" }}>Аватарка</b>
           </Typography>
           <CardMedia
             component="img"
@@ -160,7 +160,6 @@ const PersonalCaptain = () => {
         </Grid>
         <Paper className={classes.paperData} elevation={5}>
           <Grid item={6}>
-
             <Typography
               className={classes.data}
               gutterBottom
@@ -192,7 +191,6 @@ const PersonalCaptain = () => {
               component="p"
             >
               <Typography component="p" variant="h5">
-                <b>Удалить аккаунт</b>
                 <Button
                   onClick={handleDelete}
                   variant="contained"
@@ -204,13 +202,14 @@ const PersonalCaptain = () => {
                 </Button>
               </Typography>
               <Fab
-                  style={{
-                    width: "80px",
-                    backgroundColor: "inherit",
-                    color: "#1c191a",
-                  }}
-                  aria-label="edit"
-                  // onClick={() => setIsEditing(true)}
+                style={{
+                  width: "60px",
+                  margin: "0 20px",
+                  backgroundColor: "inherit",
+                  color: "#1c191a",
+                }}
+                aria-label="edit"
+                // onClick={() => setIsEditing(true)}
               >
                 <EditIcon onClick={handleOpen} />
               </Fab>
@@ -219,7 +218,6 @@ const PersonalCaptain = () => {
                 component="p"
                 variant="h5"
               >
-                <b>Выйти из аккаунта</b>
                 <Link className={classes.personalArea} to="/">
                   <Button
                     className={classes.next}
@@ -251,7 +249,7 @@ const PersonalCaptain = () => {
       >
         <Fade in={open}>
           <Paper className={classes.editPaper}>
-            <Grid  className={classes.modal} container spacing={4}>
+            <Grid className={classes.modal} container spacing={4}>
               <Grid item={3}>
                 <TextField
                   onChange={handleEditName}
@@ -297,9 +295,11 @@ const PersonalCaptain = () => {
               >
                 Сохранить
               </Button>
-              <Button variant="contained"
-                      className={classes.close}
-                 onClick={handleCloseButton}>
+              <Button
+                variant="contained"
+                className={classes.close}
+                onClick={handleCloseButton}
+              >
                 Закрыть
               </Button>
             </Box>
