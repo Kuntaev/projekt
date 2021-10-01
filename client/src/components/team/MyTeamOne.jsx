@@ -3,7 +3,7 @@ import { Box, Button, Dialog, DialogActions, TextField } from '@material-ui/core
 import Typography from '@material-ui/core/Typography';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { addTeam, editTeam, loadOneMyTeam, loadOneTeam } from '../../redux/features/team';
+import { editTeam, loadOneMyTeam } from '../../redux/features/team';
 import { makeStyles } from '@material-ui/core/styles';
 import HeaderBlack from '../header/HeaderBlack';
 
@@ -11,6 +11,9 @@ import HeaderBlack from '../header/HeaderBlack';
 const useStyles = makeStyles({
   image: {
     width: 200,
+  },
+  button: {
+    display: 'flex'
   }
 })
 
@@ -29,10 +32,15 @@ const MyTeamOne = () => {
 
   useEffect(() => {
     dispatch(loadOneMyTeam(id));
-  }, [id, dispatch]);
+  }, [id, dispatch, open]);
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  useEffect(() => {
+    dispatch(editTeam(id));
+  }, []);
+
+
+  const handleClickSave = () => {
+    dispatch(editTeam(id, text, image));
   };
 
   const handleEditName = (e) => {
@@ -45,13 +53,11 @@ const MyTeamOne = () => {
 
   const handleClose = () => {
     setOpen(false);
-    dispatch(editTeam(id, text, image));
 
   };
 
   const handleClickEdit = (id) => {
     setOpen(true);
-    dispatch(editTeam(id, text, image))
   }
 
   return (
@@ -69,13 +75,6 @@ const MyTeamOne = () => {
           onChange={handleEditName}
           variant="outlined"
         />
-        <Button
-          onClick={handleClose}
-          variant="contained"
-          color="primary"
-        >
-         Сохранить
-        </Button>
         <div>
           <TextField
             id="outlined-multiline-static"
@@ -87,7 +86,23 @@ const MyTeamOne = () => {
             variant="outlined"
           />
         </div>
+
       </div>
+          <Box>
+            <Button
+              onClick={handleClickSave}
+              variant="contained"
+              color="primary"
+            >
+              Сохранить
+            </Button>
+            <Button
+              onClick={handleClose}
+              variant="contained"
+              color="primary">
+              Закрыть
+            </Button>
+          </Box>
         </DialogActions>
       </Dialog>
       <Box>

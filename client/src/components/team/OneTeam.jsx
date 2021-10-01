@@ -12,18 +12,23 @@ const useStyles = makeStyles({
     display: 'flex'
   },
   image: {
-    marginTop: 50,
+    marginTop: 10,
     marginLeft: 150,
     width: 400,
   },
   teamName: {
-    fontSize: 40
+    fontSize: 40,
+    marginLeft: 250
   },
   captain: {
     display: 'flex',
+    color: 'red',
+    marginLeft: 300
   },
   name: {
-    marginRight: 5
+    marginRight: 5,
+    fontSize: 40,
+
   }
 })
 
@@ -55,9 +60,9 @@ const OneTeam = (props) => {
         </Box>
       <Box className={classes.captain}>
         <Typography className={classes.name}>
-          Капитан команды: {loadOneT?.captain.name}
+          CAP: {loadOneT?.captain.name}
         </Typography>
-        <Typography>
+        <Typography className={classes.name}>
           {loadOneT?.captain.surname}
         </Typography>
       </Box>
