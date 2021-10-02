@@ -69,6 +69,7 @@ export const loadOneTeam = (id) => {
     await fetch(`/team/${id}`)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data)
         dispatch({ type: "one/team/fulfilled", payload: data });
       });
   };
@@ -161,7 +162,6 @@ export const deleteTeam = (id) => {
 };
 
 export const editTeam = (id, text, image) => {
-  console.log(id)
   return async (dispatch, getState) => {
     const state = getState()
     await fetch(`/my-teams/${id}`, {

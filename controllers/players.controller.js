@@ -6,6 +6,7 @@ module.exports.playersController = {
       await Player.create({
         name: req.body.name,
         lastname: req.body.lastname,
+        room: req.body.room,
         teamId: req.body.teamId
       })
       res.json("Создан игрок")

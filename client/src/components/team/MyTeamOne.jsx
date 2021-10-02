@@ -6,11 +6,31 @@ import { useParams } from 'react-router-dom';
 import { editTeam, loadOneMyTeam } from '../../redux/features/team';
 import { makeStyles } from '@material-ui/core/styles';
 import HeaderBlack from '../header/HeaderBlack';
+import Players from '../player/Players';
 
 
 const useStyles = makeStyles({
+  main: {
+    display: 'flex'
+  },
   image: {
-    width: 200,
+    marginTop: 10,
+    marginLeft: 150,
+    width: 400,
+  },
+  teamName: {
+    fontSize: 40,
+    marginLeft: 250
+  },
+  captain: {
+    display: 'flex',
+    color: 'red',
+    marginLeft: 300
+  },
+  name: {
+    marginLeft: 350,
+    fontSize: 40,
+    justifyContent: 'space-between',
   },
   button: {
     display: 'flex'
@@ -28,6 +48,10 @@ const useStyles = makeStyles({
     backgroundColor: "rgba(101,101,105,0.28)",
     width: "300px",
     height: "160px"
+  },
+  buttons: {
+    marginLeft: 220,
+    marginTop: 60
   }
 })
 
@@ -107,33 +131,33 @@ const handlePlayerRemove = (id) => {
 }
 
   return (
+    <>
     <div>
       <HeaderBlack/>
       <Dialog open={open} onClose={handleClose}>
         <DialogActions>
-          <div>
-            <TextField
-              id="outlined-multiline-static"
-              label="Введите название команды"
-              multiline
-              rows={1}
-              value={text}
-              onChange={handleEditName}
-              variant="outlined"
-            />
-            <div>
-              <TextField
-                id="outlined-multiline-static"
-                label="Вставте ссылку аватарки"
-                multiline
-                rows={1}
-                value={image}
-                onChange={handleEditImage}
-                variant="outlined"
-              />
-            </div>
-
-          </div>
+      <div>
+        <TextField
+          id="outlined-multiline-static"
+          label="Введите название команды"
+          multiline
+          rows={1}
+          value={text}
+          onChange={handleEditName}
+          variant="outlined"
+        />
+        <div>
+          <TextField
+            id="outlined-multiline-static"
+            label="Вставте ссылку аватарки"
+            multiline
+            rows={1}
+            value={image}
+            onChange={handleEditImage}
+            variant="outlined"
+          />
+        </div>
+      </div>
           <Box>
             <Button
               onClick={handleClickSave}
@@ -151,18 +175,25 @@ const handlePlayerRemove = (id) => {
           </Box>
         </DialogActions>
       </Dialog>
-      <Box>
-        <img className={classes.image} src={loadOneMyT?.image}/>
+      <Box className={classes.main}>
+        <Box>
+          <img className={classes.image} src={loadOneMyT?.image}/>
+          <Typography className={classes.teamName}>
+            {loadOneMyT?.name}
+          </Typography>
+        </Box>
+        <Box className={classes.name}>
+          <Players/>
+        </Box>
       </Box>
-      <Typography>
-        {loadOneMyT?.name}
-      </Typography>
-      <Button onClick={handleClickEdit}>
-        Изменить
-      </Button>
-      <Button onClick={handleClickAdd}>
-        Добавить игрока
-      </Button>
+      <Box className={classes.buttons}>
+        <Button onClick={handleClickEdit}>
+          Изменить
+        </Button>
+        <Button onClick={handleClickAdd}>
+          Добавить игрока
+        </Button>
+      </Box>
       <Dialog
           className={classes.backgroudPaper}
           open={openAdd}
@@ -209,29 +240,8 @@ const handlePlayerRemove = (id) => {
           </div>
         </DialogActions>
       </Dialog>
-      <Box>
-        <Typography component="h1">Список игроков команды</Typography>
-        {players.map((item,) => {
-          return (
-              <>
-                <Paper className={classes.paperPlayer} elevation={5}>
-                  <Box>
-                    <Typography component="div" variant="h6"><b>Имя игрока</b>: {item.name}</Typography>
-                    <Typography component="div" variant="h6"><b>Фамилия игрока</b>: {item.lastname}</Typography>
-                    <Button
-                        onClick={ () => handlePlayerRemove(item.id)}
-                        variant="contained"
-                        style={{backgroundColor: "red"}}
-                    >
-                      Удалить
-                    </Button>
-                  </Box>
-                </Paper>
-              </>
-          )
-        })}
-      </Box>
     </div>
+    </>
   );
 };
 
