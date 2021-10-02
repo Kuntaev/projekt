@@ -30,7 +30,7 @@ const useStyles = makeStyles({
     outline: "none",
   },
   personalArea: {
-    color: "white",
+    color: "black",
     fontWeight: "bold",
     fontSize: "19px",
     textDecoration: "none"

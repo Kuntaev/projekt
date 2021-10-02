@@ -76,26 +76,26 @@ export function team(state = initialState, action) {
   }
 }
 
-export  const  captainPlayerAdd = (data) => {
-  return async (dispatch, getState) => {
-    dispatch({type: "player/receive/pending"})
-    const state = getState()
-    const response = await fetch("http://localhost:3013/player/receive", {
-      method: "POST",
-      headers : {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${state.captain.token}`,
-      },
-      body: JSON.stringify(data)
-    })
-    const json = await  response.json()
-  if(json.errorPlayer) {
-    dispatch({type: "player/receive/rejected", errorPlayer: json.errorPlayer})
-  } else {
-    dispatch({type: "player/receive/fulfilled", payload: json})
-  }
-  }
-}
+// export  const  captainPlayerAdd = (data) => {
+//   return async (dispatch, getState) => {
+//     dispatch({type: "player/receive/pending"})
+//     const state = getState()
+//     const response = await fetch("http://localhost:3013/player/receive", {
+//       method: "POST",
+//       headers : {
+//         "Content-type": "application/json",
+//         Authorization: `Bearer ${state.captain.token}`,
+//       },
+//       body: JSON.stringify(data)
+//     })
+//     const json = await  response.json()
+//   if(json.errorPlayer) {
+//     dispatch({type: "player/receive/rejected", errorPlayer: json.errorPlayer})
+//   } else {
+//     dispatch({type: "player/receive/fulfilled", payload: json})
+//   }
+//   }
+// }
 
 export const loadingTeams = () => {
   return async (dispatch) => {
@@ -112,6 +112,7 @@ export const loadOneTeam = (id) => {
     await fetch(`/team/${id}`)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data)
         dispatch({ type: "one/team/fulfilled", payload: data });
       });
   };
@@ -204,7 +205,6 @@ export const deleteTeam = (id) => {
 };
 
 export const editTeam = (id, text, image) => {
-  console.log(id)
   return async (dispatch, getState) => {
     const state = getState()
     await fetch(`/my-teams/${id}`, {
