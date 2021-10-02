@@ -162,7 +162,6 @@ export const deleteTeam = (id) => {
 };
 
 export const editTeam = (id, text, image) => {
-  console.log(id)
   return async (dispatch, getState) => {
     const state = getState()
     await fetch(`/my-teams/${id}`, {

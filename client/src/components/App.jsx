@@ -6,7 +6,6 @@ import MyTeam from "./team/MyTeam";
 import Teams from "./team/Teams";
 import SignInPage from "./auth/SignInPage";
 import SignUpPage from "./auth/SignUpPage";
-
 import PersonalCaptain from "./personalArea/PersonalCaptain";
 import OneTeam from "./team/OneTeam";
 import Play from './play/Play';
@@ -15,6 +14,9 @@ const App = () => {
   return (
     <BrowserRouter>
       <Switch>
+        <Route exact path={"/my-teams/:id"}>
+          <MyTeamOne/>
+        </Route>
         <Route exact path="/">
           <Main />
         </Route>
@@ -23,9 +25,6 @@ const App = () => {
         </Route>
         <Route exact path={"/team/:id"}>
           <OneTeam />
-        </Route>
-        <Route exact path={"/my-teams/:id"}>
-          <MyTeamOne/>
         </Route>
         <Route exact path="/team">
           <Teams />

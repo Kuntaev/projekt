@@ -92,5 +92,4 @@ module.exports.teamsController = {
       res.json("Ошибка при выводе команд " + e)
     }
   },
-
 };
