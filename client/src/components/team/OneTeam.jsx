@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadOneTeam } from '../../redux/features/team';
 import { useParams } from "react-router-dom"
-import { Box, CardMedia } from '@material-ui/core';
+import { Box, CardMedia, Table } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import HeaderBlack from '../header/HeaderBlack';
+import Players from '../player/Players';
 
 const useStyles = makeStyles({
   main: {
@@ -66,6 +67,8 @@ const OneTeam = (props) => {
           {loadOneT?.captain.surname}
         </Typography>
       </Box>
+      </Box>
+      <Box>
       </Box>
     </div>
   );
