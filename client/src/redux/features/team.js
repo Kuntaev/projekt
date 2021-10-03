@@ -1,4 +1,7 @@
 const initialState = {
+  messagePlayer: null,
+  errorPlayer: null,
+  player: [],
   loadTeam: [],
   myTeam: [],
   token: localStorage.getItem("token"),
@@ -49,10 +52,50 @@ export function team(state = initialState, action) {
         ...state,
         myTeam: [...state.myTeam, action.payload],
       }
+
+    case "player/receive/pending":
+    return {
+      ...state,
+      loading: true
+    }
+    case "player/receive/rejected":
+      return {
+        ...state,
+        loading: false,
+        errorPlayer: action.errorPlayer
+      }
+    case "player/receive/fulfilled":
+      return {
+        ...state,
+        loading: false,
+        player: {...state.player, ...action.payload}
+      }
+
     default:
       return state;
   }
 }
+
+// export  const  captainPlayerAdd = (data) => {
+//   return async (dispatch, getState) => {
+//     dispatch({type: "player/receive/pending"})
+//     const state = getState()
+//     const response = await fetch("http://localhost:3013/player/receive", {
+//       method: "POST",
+//       headers : {
+//         "Content-type": "application/json",
+//         Authorization: `Bearer ${state.captain.token}`,
+//       },
+//       body: JSON.stringify(data)
+//     })
+//     const json = await  response.json()
+//   if(json.errorPlayer) {
+//     dispatch({type: "player/receive/rejected", errorPlayer: json.errorPlayer})
+//   } else {
+//     dispatch({type: "player/receive/fulfilled", payload: json})
+//   }
+//   }
+// }
 
 export const loadingTeams = () => {
   return async (dispatch) => {

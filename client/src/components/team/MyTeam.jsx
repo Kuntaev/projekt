@@ -82,7 +82,7 @@ const MyTeam = () => {
     dispatch(loadMyTeam());
   }, []);
 
-  const { myTeam } = useSelector((state) => state.team);
+  const { loadTeam } = useSelector((state) => state.team);
 
   const token = useSelector((state) => state.captain.token);
 
@@ -157,7 +157,7 @@ const MyTeam = () => {
       <Box>
         {token ? (
           <Grid container className={classes.main} spacing={5}>
-            {myTeam?.map((item) => {
+            {loadTeam?.map((item) => {
               return (
                 <Grid item xs={3}>
                   <NavLink to={`/my-teams/${item?._id}`}>
