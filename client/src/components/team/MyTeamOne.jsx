@@ -71,6 +71,7 @@ const MyTeamOne = () => {
   const [openAdd, setOpenAdd] = React.useState(false);
   const [name, setName] = useState("");
   const [lastname, setLastname] = useState("");
+  const [room, setRoom] = useState("")
 
   const [text, setText] = useState("");
   const [image, setImage] = useState("");
@@ -125,8 +126,11 @@ const MyTeamOne = () => {
   const handleLastnameAdd = (e) => {
     setLastname(e.target.value);
   };
+  const handleRoomAdd = (e) => {
+    setRoom(e.target.value)
+  }
   const handlePlayerAdd = () => {
-    dispatch(captainPlayerAdd({ name, lastname, id}));
+    dispatch(captainPlayerAdd({ name, lastname, room, id}));
   };
 
   return (
@@ -211,6 +215,14 @@ const MyTeamOne = () => {
                 multiline
                 rows={1}
                 variant="outlined"
+              />
+              <TextField
+                  onChange={handleRoomAdd}
+                  id="outlined-multiline-static"
+                  label="Введите номер игрока"
+                  multiline
+                  rows={1}
+                  variant="outlined"
               />
               <div>
                 <Button onClick={handlePlayerAdd} variant="contained">
