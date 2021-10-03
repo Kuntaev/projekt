@@ -48,14 +48,16 @@ const OneTeam = (props) => {
   const [open, setOpen] = React.useState(false);
 
   const dispatch = useDispatch();
+
   const { loadOneT } = useSelector((state) => state.team);
+  console.log(loadOneT)
+  const { player } = useSelector((state) => state.player);
 
   const { id } = useParams();
 
   useEffect(() => {
     dispatch(loadOneTeam(id));
   }, [id, dispatch]);
-  console.log(loadOneT)
 
   return (
     <div>
@@ -72,12 +74,21 @@ const OneTeam = (props) => {
           <Typography className={classes.name}>
           CAP: {loadOneT?.captain.name}
         </Typography>
+
+
           <Typography className={classes.name}>
             {loadOneT?.captain.surname}
           </Typography>
         </Box>
         <Box className={classes.players}>
-          <Players/>
+          {player.map((item) => {
+            return (
+                <>
+                  <Typography component="div" variant="h6">{item.name}</Typography>
+                  <Typography component="span" variant="h6">{item.lastname}</Typography>
+                </>
+            )
+          })}
         </Box>
       </Box>
       </Box>

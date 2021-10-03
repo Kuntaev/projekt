@@ -4,7 +4,7 @@ module.exports.playersController = {
    CaptainAddPlayer: async (req, res) => {
      try {
 
-       const {name, lastname, id} = req.body
+       const {name, lastname,room, id} = req.body
        if(!name) {
         return  res.status(401).json({errorPlayer: "Ввидите имя игрока!"})
        }
@@ -13,6 +13,7 @@ module.exports.playersController = {
        }
        const newPlayer = await Player.create({
          name,
+         room,
          lastname,
          teamId: id
        })
