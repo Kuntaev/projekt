@@ -3,6 +3,8 @@ const { playersController } = require("../controllers/players.controller")
 
 const router = Router()
 
+router.post("/player/add", playersController.CaptainAddPlayer)
+router.delete("/player/delete/:id", playersController.removePlayer)
 router.post("/players/", playersController.addPlayer)
 router.get("/players/", playersController.getPlayers)
 router.get("/players/:id", playersController.getPlayerId)
