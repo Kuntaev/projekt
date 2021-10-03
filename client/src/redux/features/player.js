@@ -31,6 +31,7 @@ export function player(state = initialState, action) {
 }
 
 export const  captainPlayerAdd = (data) => {
+  console.log(data)
    return async (dispatch) => {
      dispatch({type: "player/add/pending"})
      const  response =  await  fetch("/player/add", {
