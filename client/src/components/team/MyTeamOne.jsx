@@ -20,13 +20,10 @@ const useStyles = makeStyles({
     display: "flex",
   },
   image: {
-    marginTop: 10,
-    marginLeft: 150,
     width: 400,
   },
   teamName: {
     fontSize: 40,
-    marginLeft: 250,
   },
   captain: {
     display: "flex",
@@ -56,9 +53,24 @@ const useStyles = makeStyles({
     height: "160px",
   },
   buttons: {
-    marginLeft: 220,
+    textAlign: 'center',
+    marginLeft: 200,
     marginTop: 60,
   },
+  boxs: {
+    textAlign: 'center',
+    marginLeft: 200
+  },
+  btnsh: {
+    display: 'flex'
+  },
+  btnsh2: {
+    marginLeft: 20
+  },
+  btnSave: {
+    marginBottom: 20,
+    marginTop: 5
+  }
 });
 
 const MyTeamOne = () => {
@@ -103,7 +115,7 @@ const MyTeamOne = () => {
     setOpen(false);
   };
 
-  const handleClickEdit = (id) => {
+  const handleClickEdit = () => {
     setOpen(true);
   };
 
@@ -139,7 +151,9 @@ const MyTeamOne = () => {
         <HeaderBlack />
         <Dialog open={open} onClose={handleClose}>
           <DialogActions>
-            <div>
+            <Box className={classes.btnsh}>
+              <Box>
+            <Box>
               <TextField
                 id="outlined-multiline-static"
                 label="Введите название команды"
@@ -149,7 +163,8 @@ const MyTeamOne = () => {
                 onChange={handleEditName}
                 variant="outlined"
               />
-              <div>
+              </Box>
+              <Box>
                 <TextField
                   id="outlined-multiline-static"
                   label="Вставте ссылку аватарки"
@@ -159,24 +174,27 @@ const MyTeamOne = () => {
                   onChange={handleEditImage}
                   variant="outlined"
                 />
-              </div>
-            </div>
-            <Box>
-              <Button
-                onClick={handleClickSave}
-                variant="contained"
-                color="primary"
-              >
-                Сохранить
-              </Button>
+            </Box>
+              </Box>
+            <Box className={classes.btnsh2}>
+              <Box className={classes.btnSave}>
+                <Button
+                  onClick={handleClickSave}
+                  variant="contained"
+                  color="primary"
+                >
+                  Сохранить
+                </Button>
+              </Box>
               <Button onClick={handleClose} variant="contained" color="primary">
                 Закрыть
               </Button>
             </Box>
+            </Box>
           </DialogActions>
         </Dialog>
         <Box className={classes.main}>
-          <Box>
+          <Box className={classes.boxs}>
             <img className={classes.image} src={loadOneMyT?.image} />
             <Typography className={classes.teamName}>
               {loadOneMyT?.name}

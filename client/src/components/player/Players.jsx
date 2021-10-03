@@ -43,7 +43,7 @@ const Players = () => {
             <TableHead>
               <TableRow>
                 <TableCell>Имя</TableCell>
-                <TableCell align="right">Фамилия</TableCell>
+                <TableCell>Фамилия</TableCell>
                 <TableCell align="right">Номер</TableCell>
                 <TableCell align="right"></TableCell>
               </TableRow>
@@ -58,7 +58,7 @@ const Players = () => {
                   <TableCell component="th" scope="row">
                     {item.name}
                   </TableCell>
-                  <TableCell align="right">{item.lastname}</TableCell>
+                  <TableCell>{item.lastname}</TableCell>
                   <TableCell align="right">{item.room}</TableCell>
                   <TableCell>
                     <Button
