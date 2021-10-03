@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadPlayers } from '../../redux/features/player';
+import { loadPlayers, playerDelete } from '../../redux/features/player';
 import { Box, Grid, Typography } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -29,6 +29,10 @@ const Players = () => {
   const { player } = useSelector((state) => state.player);
 
 
+
+ const   handleDeletePlayer = (id) => {
+     dispatch(playerDelete(id))
+ }
   return (
       <Box>
         {player?.map((item) => {
@@ -38,7 +42,10 @@ const Players = () => {
                 <Box>{item.name}</Box>
                 <Box> </Box>
                 <Box>{item.lastname}</Box>
-                <Button  variant="contained" color="secondary">Удалить</Button>
+                <Button
+                  onClick={ () => handleDeletePlayer(item?._id)}
+
+                  variant="contained" color="secondary">Удалить</Button>
               </Box>
             </>
             );

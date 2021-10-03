@@ -11,17 +11,29 @@ module.exports.playersController = {
        if(!lastname) {
         return  res.status(401).json({errorPlayer: "Ввидите фамилию игрока!"})
        }
-       await Player.create({
+       const newPlayer = await Player.create({
          name,
          lastname,
          teamId: id
        })
-       res.status(200).json("Игрок добавлен в команду")
+       res.status(200).json(newPlayer)
      }
      catch (e) {
        res.status(400).json("Ошибка  при добавлении игрока " + e.toString())
      }
    },
+  removePlayer: async (req, res) => {
+     try {
+        const {id} = req.params
+       await Player.findByIdAndRemove(id);
+       res.json("Удалил")
+
+
+     }
+     catch (e) {
+       res.json("ошибка при удаления игрока " + e.toString())
+     }
+  },
   getPlayerId: async (req, res) => {
     try {
       const player = await Player.findById(req.params.id)

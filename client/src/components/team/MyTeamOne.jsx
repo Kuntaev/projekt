@@ -128,9 +128,7 @@ const MyTeamOne = () => {
 
 
     const handlePlayerAdd = () => {
-
             dispatch(captainPlayerAdd({name, lastname, id}))
-
     }
     return (
         <>
@@ -204,7 +202,7 @@ const MyTeamOne = () => {
                     <DialogActions>
                         <div>
                             <Typography component="p" variant="h6" color="red">
-                                {error}
+                                {console.log(error)}
                             </Typography>
                             <TextField
                                 onChange={handleNameAdd}
