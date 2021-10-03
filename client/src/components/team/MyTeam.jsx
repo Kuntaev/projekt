@@ -22,6 +22,7 @@ const useStyles = makeStyles({
     paddingBottom: 15,
   },
   inner: {
+    textAlign: 'center',
     border: "solid",
     padding: 20,
     "&:hover": {
@@ -30,8 +31,8 @@ const useStyles = makeStyles({
     },
   },
   image: {
-    textAlign: "center",
     height: 180,
+    width: 230,
   },
   name: {
     fontSize: 20,
@@ -82,7 +83,7 @@ const MyTeam = () => {
     dispatch(loadMyTeam());
   }, []);
 
-  const { loadTeam } = useSelector((state) => state.team);
+  const { myTeam } = useSelector((state) => state.team);
 
   const token = useSelector((state) => state.captain.token);
 
@@ -157,14 +158,12 @@ const MyTeam = () => {
       <Box>
         {token ? (
           <Grid container className={classes.main} spacing={5}>
-            {loadTeam?.map((item) => {
+            {myTeam?.map((item) => {
               return (
                 <Grid item xs={3}>
                   <NavLink to={`/my-teams/${item?._id}`}>
                     <Box variant="outlined" className={classes.inner}>
-                      <Box className={classes.image}>
                         <img className={classes.image} src={item?.image} />
-                      </Box>
                       <Box className={classes.name}>{item?.name}</Box>
                     </Box>
                   </NavLink>

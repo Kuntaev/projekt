@@ -27,6 +27,7 @@ const useStyles = makeStyles({
   image: {
     textAlign: "center",
     height: 180,
+    width: 230
   },
   name: {
     fontSize: 20,
