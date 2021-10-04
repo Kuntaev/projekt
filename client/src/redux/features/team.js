@@ -20,7 +20,7 @@ export function team(state = initialState, action) {
       return {
         ...state,
         loadTeam: [...state.loadTeam, action.payload],
-        myTeam: [...state.myTeam, action.payload]
+        myTeam: [...state.myTeam, action.payload],
       };
     case "add/team/rejected":
       return {
@@ -36,66 +36,45 @@ export function team(state = initialState, action) {
       return {
         ...state,
         loadOneMyT: action.payload,
-      }
+      };
     case "load/my-teams/fulfilled":
       return {
         ...state,
         myTeam: action.payload,
-      }
+      };
     case "delete/team/fulfilled":
       return {
         ...state,
-        myTeam: state.myTeam.filter(item => item._id !== action.payload)
-      }
+        myTeam: state.myTeam.filter((item) => item._id !== action.payload),
+      };
     case "edit/team/fulfilled":
       return {
         ...state,
         myTeam: [...state.myTeam, action.payload],
-      }
+      };
 
     case "player/receive/pending":
-    return {
-      ...state,
-      loading: true
-    }
+      return {
+        ...state,
+        loading: true,
+      };
     case "player/receive/rejected":
       return {
         ...state,
         loading: false,
-        errorPlayer: action.errorPlayer
-      }
+        errorPlayer: action.errorPlayer,
+      };
     case "player/receive/fulfilled":
       return {
         ...state,
         loading: false,
-        player: {...state.player, ...action.payload}
-      }
+        player: { ...state.player, ...action.payload },
+      };
 
     default:
       return state;
   }
 }
-
-// export  const  captainPlayerAdd = (data) => {
-//   return async (dispatch, getState) => {
-//     dispatch({type: "player/receive/pending"})
-//     const state = getState()
-//     const response = await fetch("http://localhost:3013/player/receive", {
-//       method: "POST",
-//       headers : {
-//         "Content-type": "application/json",
-//         Authorization: `Bearer ${state.captain.token}`,
-//       },
-//       body: JSON.stringify(data)
-//     })
-//     const json = await  response.json()
-//   if(json.errorPlayer) {
-//     dispatch({type: "player/receive/rejected", errorPlayer: json.errorPlayer})
-//   } else {
-//     dispatch({type: "player/receive/fulfilled", payload: json})
-//   }
-//   }
-// }
 
 export const loadingTeams = () => {
   return async (dispatch) => {
@@ -112,7 +91,7 @@ export const loadOneTeam = (id) => {
     await fetch(`/team/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
+        console.log(data);
         dispatch({ type: "one/team/fulfilled", payload: data });
       });
   };
@@ -121,10 +100,10 @@ export const loadOneTeam = (id) => {
 export const loadOneMyTeam = (id) => {
   return async (dispatch) => {
     await fetch(`/my-teams/${id}`)
-    .then((res) => res.json())
-    .then((data) => {
-      dispatch({ type: "one/my-teams/fulfilled", payload: data });
-    });
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch({ type: "one/my-teams/fulfilled", payload: data });
+      });
   };
 };
 
@@ -155,7 +134,6 @@ export const loadOneMyTeam = (id) => {
 //     }
 //   }
 // };
-
 
 export const addTeam = (text, image) => {
   return async (dispatch, getState) => {
@@ -189,41 +167,40 @@ export const addTeam = (text, image) => {
 
 export const deleteTeam = (id) => {
   return async (dispatch, getState) => {
-
-    const state = getState()
+    const state = getState();
     await fetch(`team/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${state.captain.token}`,
-      }
+      },
     })
-    .then((res) => res.json())
-    .then((data) => {
-      dispatch({type: "delete/team/fulfilled", payload: data})
-    })
-  }
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch({ type: "delete/team/fulfilled", payload: data });
+      });
+  };
 };
 
 export const editTeam = (id, text, image) => {
   return async (dispatch, getState) => {
-    const state = getState()
+    const state = getState();
     await fetch(`/my-teams/${id}`, {
       method: "PATCH",
       body: JSON.stringify({
         name: text,
         image: image,
       }),
-      headers:{
+      headers: {
         "Content-type": "application/json",
         Authorization: `Bearer ${state.captain.token}`,
-      }
+      },
     })
-    .then((res) => res.json())
-    .then((data) => {
-      dispatch({type: "edit/team/fulfilled", payload: data})
-    })
-  }
-}
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch({ type: "edit/team/fulfilled", payload: data });
+      });
+  };
+};
 
 export const loadMyTeam = () => {
   return async (dispatch, getState) => {
@@ -234,9 +211,9 @@ export const loadMyTeam = () => {
         "Content-type": "application/json",
       },
     })
-    .then((res) => res.json())
-    .then((data) => {
-      dispatch({ type: "load/my-teams/fulfilled", payload: data });
-    });
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch({ type: "load/my-teams/fulfilled", payload: data });
+      });
   };
 };
