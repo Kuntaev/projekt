@@ -42,7 +42,7 @@ export const loadEvents = () => {
   }
 }
 
-export const addEvents = (name, width, time, date, longs) => {
+export const addEvents = (name, width, time, date, longs, captain, teamId) => {
   return async (dispatch) => {
     dispatch({type: "add/event/pending"});
 
@@ -53,13 +53,16 @@ export const addEvents = (name, width, time, date, longs) => {
         width:width,
         time:time,
         date:date,
-        longs:longs
+        longs:longs,
+        captain: captain,
+        teamId: teamId
       }),
       headers: {
         "Content-type": "application/json",
       },
     });
     const json = await response.json();
+    window.location.reload()
     dispatch({ type: "add/team/fulfilled", payload: json })
   }
 }
