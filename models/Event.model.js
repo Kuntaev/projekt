@@ -1,12 +1,36 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 const eventSchema = mongoose.Schema({
-  long: Number,
-  width: Number,
-  date: String,
-  time: String,
-})
+  name: {
+    type: String,
+    required: true,
+  },
+  longs: {
+    type: Number,
+    required: true,
+  },
+  width: {
+    type: Number,
+    required: true,
+  },
+  date: {
+    type: String,
+    required: true,
+  },
+  time: {
+    type: String,
+    required: true,
+  },
+  captain: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Captain"
+  },
+  teamId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Teams"
+  }
+});
 
-const Event = mongoose.model("Event", eventSchema)
+const Event = mongoose.model("Event", eventSchema);
 
-module.exports = Event
+module.exports = Event;
