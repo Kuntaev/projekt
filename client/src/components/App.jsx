@@ -9,6 +9,8 @@ import SignUpPage from "./auth/SignUpPage";
 import PersonalCaptain from "./personalArea/PersonalCaptain";
 import OneTeam from "./team/OneTeam";
 import Play from './play/Play';
+import Header from "./header/Header";
+import HeaderBlack from "./header/HeaderBlack";
 
 const App = () => {
   return (
@@ -21,6 +23,7 @@ const App = () => {
           <Main />
         </Route>
         <Route path="/personal/captain">
+            <HeaderBlack/>
           <PersonalCaptain />
         </Route>
         <Route exact path={"/team/:id"}>

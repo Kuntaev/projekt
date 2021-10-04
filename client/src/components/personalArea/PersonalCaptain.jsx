@@ -22,7 +22,6 @@ import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import { Link, useHistory } from "react-router-dom";
 import EditIcon from "@material-ui/icons/Edit";
-import HomeIcon from "@material-ui/icons/Home";
 import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles({
@@ -30,13 +29,14 @@ const useStyles = makeStyles({
     marginLeft: "100px",
     width: "300px",
     height: "350px",
-    borderRadius: "20px",
+    borderRadius: "50px",
   },
   img: {
     backgroundImage:
-      "URL(https://images.pexels.com/photos/54567/pexels-photo-54567.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=700&w=1140)",
-    width: "1400px",
-    height: "696px",
+      "URL(https://oir.mobi/uploads/posts/2021-03/1616582404_5-p-chernii-fon-gradient-6.jpg)",
+    borderRadius: "10px",
+    width: "1430px",
+    height: "678px",
   },
   area: {
     alignItems: "center",
@@ -69,6 +69,7 @@ const useStyles = makeStyles({
     fontWeight: "bold",
   },
   paperData: {
+    backgroundColor: "grey",
     borderRadius: "10px 50px 10px 50px",
     marginTop: "30px",
     width: "500px",
@@ -94,7 +95,7 @@ const useStyles = makeStyles({
     alignItems: "center",
   },
   modalProfile: {
-    margin: "49px 516px 100px ",
+    margin: "162px 525px 100px ",
   },
   close: {
     fontSize: "18px",
@@ -110,9 +111,9 @@ const PersonalCaptain = () => {
   const captain = useSelector((state) => state.captain.captain);
 
   const [open, setOpen] = React.useState(false);
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [mail, setMail] = useState("");
+  const [name, setName] = useState(captain.name);
+  const [surname, setSurname] = useState(captain.surname);
+  const [mail, setMail] = useState(captain.mail);
   const [avatar, setAvatar] = useState("");
 
   useEffect(() => {
@@ -147,6 +148,7 @@ const PersonalCaptain = () => {
   };
   return (
     <Container className={classes.img}>
+
       <Grid className={classes.area} container spacing={5}>
         <Grid item={6}>
           <Typography className={classes.text} variant="h5" component="span">
