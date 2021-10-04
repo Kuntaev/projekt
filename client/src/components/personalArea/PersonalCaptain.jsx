@@ -29,13 +29,14 @@ const useStyles = makeStyles({
     marginLeft: "100px",
     width: "300px",
     height: "350px",
-    borderRadius: "20px",
+    borderRadius: "50px",
   },
   img: {
     backgroundImage:
-      "URL(https://images.pexels.com/photos/54567/pexels-photo-54567.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=700&w=1140)",
-    width: "1400px",
-    height: "696px",
+      "URL(https://oir.mobi/uploads/posts/2021-03/1616582404_5-p-chernii-fon-gradient-6.jpg)",
+    borderRadius: "10px",
+    width: "1430px",
+    height: "678px",
   },
   area: {
     alignItems: "center",
@@ -48,6 +49,7 @@ const useStyles = makeStyles({
   delete: {
     fontSize: "18px",
     marginTop: "10px",
+    marginLeft: "60px",
     color: "white",
   },
   dataRemove: {
@@ -67,6 +69,7 @@ const useStyles = makeStyles({
     fontWeight: "bold",
   },
   paperData: {
+    backgroundColor: "grey",
     borderRadius: "10px 50px 10px 50px",
     marginTop: "30px",
     width: "500px",
@@ -80,9 +83,7 @@ const useStyles = makeStyles({
   BoxSave: {
     display: "flex",
     justifyContent: "space-evenly",
-
     marginTop: "20px",
-
   },
   editPaper: {
     borderRadius: "10px 50px 10px 50px",
@@ -91,16 +92,16 @@ const useStyles = makeStyles({
   },
   modal: {
     marginLeft: "6px",
-    alignItems: "center"
+    alignItems: "center",
   },
   modalProfile: {
-    margin: "49px 523px 100px ",
+    margin: "162px 525px 100px ",
   },
   close: {
     fontSize: "18px",
     color: "white",
     backgroundColor: "grey",
-  }
+  },
 });
 
 const PersonalCaptain = () => {
@@ -110,8 +111,10 @@ const PersonalCaptain = () => {
   const captain = useSelector((state) => state.captain.captain);
 
   const [open, setOpen] = React.useState(false);
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
+  const [name, setName] = useState(captain.name);
+  const [surname, setSurname] = useState(captain.surname);
+  const [mail, setMail] = useState(captain.mail);
+  const [avatar, setAvatar] = useState("");
 
   useEffect(() => {
     dispatch(getAuthorizationCaptain());
@@ -119,7 +122,7 @@ const PersonalCaptain = () => {
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const handleCloseButton = () => setOpen(false)
+  const handleCloseButton = () => setOpen(false);
 
   const handleEditName = (e) => {
     setName(e.target.value);
@@ -127,8 +130,11 @@ const PersonalCaptain = () => {
   const handleEditSurname = (e) => {
     setSurname(e.target.value);
   };
+  const handleEditMail = (e) => {
+    setMail(e.target.value);
+  };
   const handleEdit = () => {
-    dispatch(editCaptainById({ name, surname }));
+    dispatch(editCaptainById({ name, surname, mail, avatar }));
   };
   const handleDelete = () => {
     dispatch(deleteAccount());
@@ -137,14 +143,16 @@ const PersonalCaptain = () => {
   const handleOutput = () => {
     dispatch(outputCaptain());
   };
-
-
+  const handleEditAvatar = (e) => {
+    setAvatar(e.target.value);
+  };
   return (
     <Container className={classes.img}>
+
       <Grid className={classes.area} container spacing={5}>
         <Grid item={6}>
           <Typography className={classes.text} variant="h5" component="span">
-            <b style={{ marginLeft: "80px"}}>Аватарка</b>
+            <b style={{ marginLeft: "80px" }}>Аватарка</b>
           </Typography>
           <CardMedia
             component="img"
@@ -154,7 +162,6 @@ const PersonalCaptain = () => {
         </Grid>
         <Paper className={classes.paperData} elevation={5}>
           <Grid item={6}>
-
             <Typography
               className={classes.data}
               gutterBottom
@@ -186,7 +193,6 @@ const PersonalCaptain = () => {
               component="p"
             >
               <Typography component="p" variant="h5">
-                <b>Удалить аккаунт</b>
                 <Button
                   onClick={handleDelete}
                   variant="contained"
@@ -198,13 +204,14 @@ const PersonalCaptain = () => {
                 </Button>
               </Typography>
               <Fab
-                  style={{
-                    width: "80px",
-                    backgroundColor: "inherit",
-                    color: "#1c191a",
-                  }}
-                  aria-label="edit"
-                  // onClick={() => setIsEditing(true)}
+                style={{
+                  width: "60px",
+                  margin: "0 20px",
+                  backgroundColor: "inherit",
+                  color: "#1c191a",
+                }}
+                aria-label="edit"
+                // onClick={() => setIsEditing(true)}
               >
                 <EditIcon onClick={handleOpen} />
               </Fab>
@@ -213,7 +220,6 @@ const PersonalCaptain = () => {
                 component="p"
                 variant="h5"
               >
-                <b>Выйти из аккаунта</b>
                 <Link className={classes.personalArea} to="/">
                   <Button
                     className={classes.next}
@@ -245,8 +251,8 @@ const PersonalCaptain = () => {
       >
         <Fade in={open}>
           <Paper className={classes.editPaper}>
-            <Grid  className={classes.modal} container spacing={4}>
-              <Grid item={5}>
+            <Grid className={classes.modal} container spacing={4}>
+              <Grid item={3}>
                 <TextField
                   onChange={handleEditName}
                   value={name}
@@ -255,13 +261,31 @@ const PersonalCaptain = () => {
                   label="Имя"
                 />
               </Grid>
-              <Grid item={5}>
+              <Grid item={3}>
                 <TextField
                   onChange={handleEditSurname}
                   value={surname}
                   variant="outlined"
                   required
                   label="Фамилия"
+                />
+              </Grid>
+              <Grid item={3}>
+                <TextField
+                  onChange={handleEditMail}
+                  value={mail}
+                  variant="outlined"
+                  required
+                  label="Почта"
+                />
+              </Grid>
+              <Grid item={3}>
+                <TextField
+                  onChange={handleEditAvatar}
+                  value={avatar}
+                  variant="outlined"
+                  required
+                  label="фото"
                 />
               </Grid>
             </Grid>
@@ -273,9 +297,11 @@ const PersonalCaptain = () => {
               >
                 Сохранить
               </Button>
-              <Button variant="contained"
-                      className={classes.close}
-                 onClick={handleCloseButton}>
+              <Button
+                variant="contained"
+                className={classes.close}
+                onClick={handleCloseButton}
+              >
                 Закрыть
               </Button>
             </Box>

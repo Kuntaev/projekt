@@ -1,7 +1,8 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Captain = require("../models/Captain.model");
-const path = require("path");
+
+
 module.exports.captainController = {
   registrationCaption: async (req, res) => {
     try {
@@ -142,13 +143,13 @@ module.exports.captainController = {
 
   editProfile: async (req, res) => {
     try {
-      const { name, surname } = req.body;
+      const { name, surname, mail, avatar } = req.body;
       const id = req.captain.id;
       const options = { new: true };
 
       const pathCaptainById = await Captain.findByIdAndUpdate(
         id,
-        { name, surname },
+        { name, surname, mail, avatar },
         options
       );
       res.json(pathCaptainById);

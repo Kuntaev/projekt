@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Container, Grid, TextField } from "@material-ui/core";
+import { Box, Container, Grid, TextField, Typography } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addTeam,
@@ -20,8 +20,10 @@ const useStyles = makeStyles({
     paddingLeft: 15,
     paddingRight: 15,
     paddingBottom: 15,
+    marginLeft: 50
   },
   inner: {
+    textAlign: 'center',
     border: "solid",
     padding: 20,
     "&:hover": {
@@ -30,8 +32,8 @@ const useStyles = makeStyles({
     },
   },
   image: {
-    textAlign: "center",
     height: 180,
+    width: 230,
   },
   name: {
     fontSize: 20,
@@ -47,14 +49,35 @@ const useStyles = makeStyles({
       "URL(https://www.m24.ru/b/d/nBkSUhL2hFMlm8i2Lr6BosSyyJ2gp8TrlnTclb7P73OHezeOWXiSxTZt4slI-BHBsdWR_G-JLsV0=UOJ9qPQfj6-RO_mxeQnIHg.jpg)",
   },
   createTeam: {
-    width: 350,
-    height: 250,
-    backgroundSize: "cover",
-    textAlign: "center",
-    borderRadius: 10,
-    margin: "auto",
-    backgroundColor: "grey",
+    marginTop: 30,
+    marginLeft: 76
   },
+  btn: {
+    display: 'flex'
+  },
+  box: {
+    width: 210
+  },
+  btnClose: {
+    marginLeft: 50,
+    marginTop: 30
+  },
+  teamBox: {
+    width: 330,
+    height: 230,
+    textAlign: 'left',
+    backgroundImage: "url(https://www.m24.ru/b/d/nBkSUhL2hFMlm8i2Lr6BosSyyJ2gp8TrlnTclb7P73OHezeOWXiSxTZt4slI-BHBsdWR_G-JLsV0=UOJ9qPQfj6-RO_mxeQnIHg.jpg)",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    borderRadius: 20,
+    marginLeft: 250,
+    marginBottom: 40,
+  },
+  text: {
+    marginTop: 20,
+    marginLeft: 40
+  }
 });
 
 const MyTeam = () => {
@@ -67,11 +90,14 @@ const MyTeam = () => {
     dispatch(loadOneTeam(id));
   };
 
-  const handleClose = () => {
+  const handleAddTeam = () => {
     setOpen(false);
     dispatch(addTeam(text, image));
     setText("");
     setImage("");
+  }
+  const handleClose = () => {
+    setOpen(false);
   };
   const dispatch = useDispatch();
 
@@ -102,34 +128,40 @@ const MyTeam = () => {
     <>
       <HeaderBlack/>
       <Box>
-        <Box className={classes.createTeam}>
-          <Button variant="outlined" onClick={handleClickOpen}>
-            Создать команду
-          </Button>
+        <Box className={classes.btn}>
+          <Box className={classes.teamBox}>
+          </Box>
+          <Box>
+            <Typography className={classes.text}>
+              Создай свою команду, добавляй игроков и играйте против команд поблизости. <br/>
+              Регистрируй своих друзей и играйте вместе в одной команде, побеждайте других! <br/>
+              Создавайте собития, выбирайте место, где будете играть, назначайте время и приглашайте <br/>
+              других команд, играйте друг против друга. Ты можешь создать несколько команд, и участвовать в <br/>
+              играх с разными командами.
+            </Typography>
+            <Box>
+              <Button className={classes.createTeam} variant="outlined" onClick={handleClickOpen}>
+                Создать команду
+              </Button>
+            </Box>
+          </Box>
         </Box>
         <div>
           <Dialog open={open} onClose={handleClose}>
             <DialogActions>
               <Container>
                 {token ? (
-                  <div>
-                    <TextField
-                      id="outlined-multiline-static"
-                      label="Введите название команды"
-                      multiline
-                      rows={1}
-                      value={text}
-                      onChange={handleAddName}
-                      variant="outlined"
-                    />
-                    <Button
-                      onClick={handleClose}
-                      variant="contained"
-                      color="primary"
-                    >
-                      Создать команду
-                    </Button>
-                    <div>
+                  <Box className={classes.btn}>
+                    <Box className={classes.box}>
+                      <TextField
+                        id="outlined-multiline-static"
+                        label="Введите название команды"
+                        multiline
+                        rows={1}
+                        value={text}
+                        onChange={handleAddName}
+                        variant="outlined"
+                      />
                       <TextField
                         id="outlined-multiline-static"
                         label="Вставте ссылку аватарки"
@@ -139,17 +171,28 @@ const MyTeam = () => {
                         onChange={handleAddImage}
                         variant="outlined"
                       />
-                    </div>
-                  </div>
+                    </Box>
+                    <Box>
+                      <Box>
+                        <Button
+                          onClick={handleAddTeam}
+                          variant="contained"
+                          color="primary"
+                        >
+                          Создать команду
+                        </Button>
+                      </Box>
+                      <Button className={classes.btnClose} onClick={handleClose} autoFocus>
+                        Закрыть
+                      </Button>
+                    </Box>
+                  </Box>
                 ) : (
                   <h3>
                     Вам необходимо <a href="/sign-in">авторизоваться...</a>
                   </h3>
                 )}
               </Container>
-              <Button onClick={handleClose} autoFocus>
-                Закрыть
-              </Button>
             </DialogActions>
           </Dialog>
         </div>
@@ -162,9 +205,7 @@ const MyTeam = () => {
                 <Grid item xs={3}>
                   <NavLink to={`/my-teams/${item?._id}`}>
                     <Box variant="outlined" className={classes.inner}>
-                      <Box className={classes.image}>
                         <img className={classes.image} src={item?.image} />
-                      </Box>
                       <Box className={classes.name}>{item?.name}</Box>
                     </Box>
                   </NavLink>
