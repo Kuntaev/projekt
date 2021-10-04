@@ -2,6 +2,8 @@ import ReactMapboxGl, { Marker } from "react-mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useSelector } from "react-redux";
 
+
+
 const Map = ReactMapboxGl({
   accessToken:
     "pk.eyJ1Ijoia2luZzk1IiwiYSI6ImNrdTJrNWw5ejJycnQyc3FudHQxeTVqMjIifQ.fRxRHzM06PWD4FJNYn0RlQ",
@@ -26,7 +28,6 @@ function Maps({ handleSelectEvent, zoom, coordinate }) {
         {events.map((event) => {
           return (
             <div>
-              <p>
                 <Marker
                   onClick={() => handleSelectEvent(event)}
                   anchor="bottom"
@@ -41,9 +42,8 @@ function Maps({ handleSelectEvent, zoom, coordinate }) {
                     style={{ fontSize: 26, color: "darkorange" }}
                   />
                 </Marker>
-              </p>
             </div>
-          );
+        );
         })}
       </Map>
     </div>
