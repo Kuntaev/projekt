@@ -23,17 +23,6 @@ ___
 - Создание и удаление событий
 - Возможность выбрать одну из своих команд и присоединиться к событию
 
-- Регистрация
-- Авторизация
-- Изменения/Удаления профиля
-- Вывод своих команд
-- Вывод всех команд
-- Вывод игроков
-- Информация о команде
-- Добавление/Удаление команд
-- Добавление/Удаление игроков
-- Назначение матча
-
 ![gif](https://github.com/MamakaevRakhim/project-football/blob/Rakhim/client/main.gif)
 
 ## Запуск проекта
@@ -104,9 +93,4 @@ npm run dev
 :white_check_mark: Вывод, добавление, редактировани и удаление команд
 :white_check_mark: Вывод игроков
 :white_check_mark: Дизайн для команд и главной страницы
----
-
-### Для выполнения поставленных задач был исмользован следующий стек:
-#### Backend: Mongoose, ExpressJS, express-fileupload, Cors, JsonWebToken, Bcrypt
-####Frontend: React, React-Thunk, React-Logger, React-Router-Dom, LocalStorage, MaterialUI
 ---
