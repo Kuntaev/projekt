@@ -8,7 +8,7 @@ module.exports.teamsController = {
   //   const captain = await Captain.findById(req.captain.id)
   //   const {name, eventId} = req.body
   //
-  //   const  {image} =req.files;
+  //   const  {image} = req.body;
   //
   //   const newFileName = `${Math.floor(Math.random() * 10000)}${image.name}`;
   //   await image.mv(`./client/public/images/${newFileName}`, async (err) => {
@@ -25,7 +25,7 @@ module.exports.teamsController = {
   //     }
   //   });
   //   } catch (e) {
-  //     res.json(e.toString())
+  //     res.json("ошибка: " + e.toString())
   //   }
   // },
   addTeam: async (req, res) => {
