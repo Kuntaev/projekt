@@ -124,7 +124,7 @@ export const registrationCaptain = (data) => {
   return async (dispatch) => {
     dispatch({ type: "caption/sign-up/pending" });
 
-    const response = await fetch("http://localhost:3013/registration", {
+    const response = await fetch("/registration", {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-type": "application/json" },
@@ -145,7 +145,7 @@ export const registrationCaptain = (data) => {
 export const authorizationCaptain = (data) => {
   return async (dispatch) => {
     dispatch({ type: "captain/sign-in/pending" });
-    const response = await fetch("http://localhost:3013/authorization", {
+    const response = await fetch("/authorization", {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-type": "application/json" },
@@ -169,7 +169,7 @@ export const getAuthorizationCaptain = () => {
   return async (dispatch, getState) => {
     dispatch({ type: "captain/load/pending" });
     const state = getState();
-    const response = await fetch("http://localhost:3013/captain/personal", {
+    const response = await fetch("/captain/personal", {
       headers: {
         Authorization: `Bearer ${state.captain.token}`,
       },
@@ -197,7 +197,7 @@ export const uploadAvatar = (file) => {
       const formData = new FormData();
       formData.append("file", file);
       const response = await fetch(
-        "http://localhost:3013/captain/personal/avatar",
+        "/captain/personal/avatar",
         {
           method: "POST",
           headers: {
@@ -218,7 +218,7 @@ export const deleteAccount = () => {
   return async (dispatch, getState) => {
     dispatch({ type: "captain/delete/pending" });
     const state = getState();
-    const response = await fetch("http://localhost:3013/captain/delete", {
+    const response = await fetch("/captain/delete", {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${state.captain.token}`,
@@ -238,7 +238,7 @@ export const editCaptainById = (data) => {
   return async (dispatch, getState) => {
     const state = getState();
     dispatch({ type: "captain/edit/pending" });
-    const response = await fetch("http://localhost:3013/captain/profile/edit", {
+    const response = await fetch("/captain/profile/edit", {
       method: "PATCH",
       headers: {
         "Content-type": "application/json",

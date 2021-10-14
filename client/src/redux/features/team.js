@@ -1,3 +1,5 @@
+import { disconnect } from 'mongoose';
+
 const initialState = {
   messagePlayer: null,
   errorPlayer: null,
@@ -15,6 +17,25 @@ export function team(state = initialState, action) {
         ...state,
         loadTeam: action.payload,
       };
+
+    // case "add/team/pending":
+    //   return {
+    //     ...state,
+    //     loading: true,
+    //   };
+    // case "add/team/rejected":
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //     error: action.payload.error,
+    //   };
+    // case "add/team/fulfilled":
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //     loadTeam: [...state.loadTeam, action.payload],
+    //     myTeam: [...state.myTeam, action.payload],
+    //   };
 
     case "add/team/fulfilled":
       return {
@@ -47,6 +68,12 @@ export function team(state = initialState, action) {
         ...state,
         myTeam: state.myTeam.filter((item) => item._id !== action.payload),
       };
+    case "add/image/fulfilled":
+      return {
+        ...state,
+        loadTeam: [...state.loadTeam, action.payload],
+        myTeam: [...state.myTeam, action.payload],
+      }
     case "edit/team/fulfilled":
       return {
         ...state,
@@ -107,35 +134,8 @@ export const loadOneMyTeam = (id) => {
   };
 };
 
-// export const addTeam = ({
-//   file,
-//   name,
-//   eventId,
-// }) => {
-//   return async (dispatch, getState) => {
-//     dispatch({ type: "add/team/pending" });
-//     const state = getState()
-//     const formData = new FormData()
-//     formData.append("image", file)
-//     formData.append("name", name)
-//     formData.append("eventId", eventId)
-//     const response = await fetch("/team", {
-//       method: "POST",
-//       headers: {
-//         Authorization: `Bearer ${state.captain.token}`
-//       },
-//       body: formData,
-//     })
-//     const json = await response.json();
-//     if (json.error) {
-//       dispatch({ type: "add/team/rejected", payload: json })
-//     } else {
-//       dispatch({ type: "add/team/fulfilled", payload: json })
-//     }
-//   }
-// };
-
-export const addTeam = (text, image) => {
+export const addTeam = (name, image) => {
+  console.log(name)
   return async (dispatch, getState) => {
     dispatch({ type: "add/team/pending" });
 
@@ -144,7 +144,7 @@ export const addTeam = (text, image) => {
       method: "POST",
 
       body: JSON.stringify({
-        name: text,
+        name: name,
         image: image,
       }),
       headers: {
@@ -164,6 +164,21 @@ export const addTeam = (text, image) => {
     }
   };
 };
+
+export const addImage = (id) => {
+  return async (dispatch) => {
+    await fetch(`team/image/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      }
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      dispatch({ type: "add/image/fulfilled", payload: data });
+    });
+  }
+}
 
 export const deleteTeam = (id) => {
   return async (dispatch, getState) => {

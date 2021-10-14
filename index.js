@@ -7,11 +7,11 @@ const path = require('path');
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(fileUpload());
-app.use(cors());
 app.use(require("./routes/index"));
-app.use("/public/uploads/img", express.static(path.resolve(__dirname, "image")));
+app.use("/public", express.static(path.resolve(__dirname, "/client/public")));
 console.log(process.env.MONGO_PORT, process.env.PORT)
 
 app.use(express.static(path.resolve(__dirname, "client", "build")));
