@@ -165,20 +165,20 @@ export const addTeam = (name, image) => {
   };
 };
 
-export const addImage = (id) => {
-  return async (dispatch) => {
-    await fetch(`team/image/${id}`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      }
-    })
-    .then((res) => res.json())
-    .then((data) => {
-      dispatch({ type: "add/image/fulfilled", payload: data });
-    });
-  }
-}
+// export const addImage = (id) => {
+//   return async (dispatch) => {
+//     await fetch(`team/image/${id}`, {
+//       method: "POST",
+//       headers: {
+//         "Content-type": "application/json",
+//       }
+//     })
+//     .then((res) => res.json())
+//     .then((data) => {
+//       dispatch({ type: "add/image/fulfilled", payload: data });
+//     });
+//   }
+// }
 
 export const deleteTeam = (id) => {
   return async (dispatch, getState) => {
@@ -196,13 +196,13 @@ export const deleteTeam = (id) => {
   };
 };
 
-export const editTeam = (id, text, image) => {
+export const editTeam = (id, name, image) => {
   return async (dispatch, getState) => {
     const state = getState();
     await fetch(`/my-teams/${id}`, {
       method: "PATCH",
       body: JSON.stringify({
-        name: text,
+        name: name,
         image: image,
       }),
       headers: {
