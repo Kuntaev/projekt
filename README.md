@@ -93,5 +93,6 @@ npm run dev
 - :white_check_mark: Модели, роуты и контроллеры для капитана.
 - :white_check_mark: Вывод, добавление, и удаление игроков
 - :white_check_mark: Возможность авторизоваться и зарегистрироваться
+- :white_check_mark: Личный кабинет
 - :white_check_mark: А также их дизайн
 ---
