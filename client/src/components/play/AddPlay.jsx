@@ -29,7 +29,6 @@ export default function FormDialog({state, onClose}) {
 
   let div;
 
-  // todo напомнить Ахмаду исправить
   const handleChangedName = (e) => {
     setName(e.target.value)
   }
