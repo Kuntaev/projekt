@@ -9,6 +9,5 @@ router.post("/authorization", captainController.authorizationCaptain)
 router.get("/captain/personal", authMiddleware, captainController.getCaptainById)
 router.delete("/captain/delete", authMiddleware, captainController.removeAccount);
 router.patch("/captain/profile/edit", authMiddleware, captainController.editProfile)
-// router.post("/captain/personal/avatar", authMiddleware, captainController.addAvatar)
 
 module.exports = router
