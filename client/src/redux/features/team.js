@@ -165,20 +165,7 @@ export const addTeam = (name, image) => {
   };
 };
 
-// export const addImage = (id) => {
-//   return async (dispatch) => {
-//     await fetch(`team/image/${id}`, {
-//       method: "POST",
-//       headers: {
-//         "Content-type": "application/json",
-//       }
-//     })
-//     .then((res) => res.json())
-//     .then((data) => {
-//       dispatch({ type: "add/image/fulfilled", payload: data });
-//     });
-//   }
-// }
+
 
 export const deleteTeam = (id) => {
   return async (dispatch, getState) => {

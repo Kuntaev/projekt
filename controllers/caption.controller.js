@@ -12,12 +12,7 @@ module.exports.captainController = {
         password,
         Number(process.env.BCRYPT_ROUNDS)
       );
-      // if (!avatar) {
-      //   res.status(401).json({ registrationError: "Необходимо ввести ссылку на аватарку" });
-      // }
-      if (!mail) {
-        res.status(401).json({ registrationError: "Необходимо ввести почту" });
-      }
+
       if (!name) {
         res.status(401).json({ registrationError: "Необходимо ввести имя" });
       }
@@ -106,28 +101,6 @@ module.exports.captainController = {
     }
   },
 
-  //
-  // addAvatar: async (req, res) => {
-  //   try {
-  //   const  file =  req.files.file
-  //   const  fileName = `./image/${Math.random() * 10000}${path.extname(file.name)}`
-  //     file.mv(fileName, async (err) => {
-  //       if (err) {
-  //         console.log(err)
-  //       } else {
-  //         res.json({
-  //           success: "Аватарка загружена",
-  //           avatar: fileName,
-  //         })
-  //         const captain = await Captain.findById(req.captain.id);
-  //         captain.avatar = fileName;
-  //       }
-  //     })
-  //   }
-  //   catch (e) {
-  //     console.log(e)
-  //   }
-  // },
   removeAccount: async (req, res) => {
     try {
       const captain = await Captain.findById(req.captain.id);
