@@ -33,7 +33,7 @@ const App = () => {
           <Teams />
         </Route>
         <Route exact path="/my-teams">
-          <MyTeam />
+          <MyTeam/>
         </Route>
         <Route exact path="/">
           <Main />

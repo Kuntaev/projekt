@@ -3,7 +3,6 @@ const Player = require("../models/Player.model")
 module.exports.playersController = {
    CaptainAddPlayer: async (req, res) => {
      try {
-
        const {name, lastname,room, id} = req.body
        if(!name) {
         return  res.status(401).json({errorPlayer: "Ввидите имя игрока!"})

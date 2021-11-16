@@ -91,8 +91,8 @@ const MyTeam = () => {
 
   const handleAddTeam = () => {
     setOpen(false);
-    dispatch(addTeam(text, image));
-    setText("");
+    dispatch(addTeam(name, image));
+    setName("");
     setImage("");
   }
   const handleClose = () => {
@@ -100,7 +100,7 @@ const MyTeam = () => {
   };
   const dispatch = useDispatch();
 
-  const [text, setText] = useState("");
+  const [name, setName] = useState("");
   const [image, setImage] = useState("");
 
   useEffect(() => {
@@ -116,7 +116,7 @@ const MyTeam = () => {
   };
 
   const handleAddName = (e) => {
-    setText(e.target.value);
+    setName(e.target.value);
   };
 
   const handleAddImage = (e) => {
@@ -157,7 +157,7 @@ const MyTeam = () => {
                         label="Введите название команды"
                         multiline
                         rows={1}
-                        value={text}
+                        value={name}
                         onChange={handleAddName}
                         variant="outlined"
                       />
@@ -204,7 +204,7 @@ const MyTeam = () => {
                 <Grid item xs={3}>
                   <NavLink to={`/my-teams/${item?._id}`}>
                     <Box variant="outlined" className={classes.inner}>
-                        <img className={classes.image} src={item?.image} />
+                      <img className={classes.image} src={item?.image} />
                       <Box className={classes.name}>{item?.name}</Box>
                     </Box>
                   </NavLink>

@@ -101,6 +101,7 @@ const MyTeamOne = () => {
 
   const handleClickSave = () => {
     dispatch(editTeam(id, text, image));
+    setOpen(false);
   };
 
   const handleEditName = (e) => {

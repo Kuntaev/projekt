@@ -6,6 +6,7 @@ const {authMiddleware} = require('../models/middlewares/auth.middlewares')
 const router = Router()
 
 router.post("/team", authMiddleware, teamsController.addTeam)
+router.post("/team/image/:id", teamsController.addImage)
 router.get("/team", teamsController.getTeams)
 router.get("/team/:id", teamsController.getTeamId)
 router.patch("/my-teams/:id", teamsController.editTeam)

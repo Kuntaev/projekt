@@ -11,7 +11,6 @@ export const eventsReducer =(state=initialState,action)=> {
         events: action.payload
       }
     case "add/team/fulfilled":
-      console.log(action.payload)
       return {
         ...state,
         events: [action.payload, ...state.events]

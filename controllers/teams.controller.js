@@ -5,27 +5,26 @@ const path = require("path");
 module.exports.teamsController = {
   // addTeam: async (req, res) => {
   //   try{
-  //   const captain = await Captain.findById(req.captain.id)
-  //   const {name, eventId} = req.body
+  //     const captain = await Captain.findById(req.captain.id)
   //
-  //   const  {image} =req.files;
+  //     const newFileName = `./client/public/images/${Math.random() * 1000000}${path.extname(req.files.image.name)}`;
   //
-  //   const newFileName = `${Math.floor(Math.random() * 10000)}${image.name}`;
-  //   await image.mv(`./client/public/images/${newFileName}`, async (err) => {
+  //     req.files.image.mv(newFileName, async (err) => {
   //     if (err) {
   //       res.json(err.toString())
   //     } else {
   //       const team = await Team.create({
-  //         name,
-  //         eventId,
+  //         name: req.body.name,
+  //         eventId: req.body.eventId,
   //         image: newFileName,
   //         captain
   //       });
+  //       await team.save()
   //       res.json(team)
   //     }
   //   });
   //   } catch (e) {
-  //     res.json(e.toString())
+  //     res.json("ошибка: " + e.toString())
   //   }
   // },
   addTeam: async (req, res) => {
@@ -42,6 +41,27 @@ module.exports.teamsController = {
       res.json("Ошибка при создании команды " + e);
     }
   },
+  addImage: async (req, res) => {
+    try {
+      const image = req.files.image
+      const newFileName = `${Math.random() * 1000000}${path.extname(image.name)}`;
+
+      image.mv(`./client/public/images/${newFileName}`, async (err) => {
+        if(err) {
+          res.json("ошибка: " + err)
+        } else {
+          const team = await Team.findById(req.params.id);
+
+          team.image = newFileName
+
+          await team.save()
+          res.json("файл загружен")
+        }
+      })
+    } catch (e) {
+      console.log("Ошибка: " + e)
+    }
+  },
   getTeams: async (req, res) => {
     try {
       const teams = await Team.find();
@@ -53,7 +73,6 @@ module.exports.teamsController = {
   getTeamId: async (req, res) => {
     try {
       const team = await Team.findById(req.params.id).populate("captain");
-      console.log(team)
       res.json(team);
     } catch (e) {
       res.json("Ошибка при выводе команды " + e);
