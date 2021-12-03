@@ -64,7 +64,7 @@ module.exports.teamsController = {
   },
   getTeams: async (req, res) => {
     try {
-      const teams = await Team.find();
+      const teams = await Team.find().populate('captain').lean();
       res.json(teams);
     } catch (e) {
       res.json("Ошибка при выводе команд " + e);

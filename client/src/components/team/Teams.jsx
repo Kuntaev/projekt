@@ -1,77 +1,89 @@
-import React, { useEffect, useState } from "react";
-import { loadingTeams, loadOneTeam } from "../../redux/features/team";
+import React, { useEffect } from "react";
+import { loadingTeams } from "../../redux/features/team";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Container, Grid } from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
+import {
+  makeStyles,
+  Box,
+  TableCell,
+  Table,
+  TableBody,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@material-ui/core";
+import HeaderBlack from "../header/HeaderBlack";
 import { NavLink } from 'react-router-dom';
-import HeaderBlack from '../header/HeaderBlack';
 
 const useStyles = makeStyles({
-  container: {
-  },
-  main: {
-    flexGrow: 0,
-    flexBasis: 33.3333,
-    paddingLeft: 15,
-    paddingRight: 15,
-    paddingBottom: 15,
-  },
-  inner: {
-    border: 'solid',
-    padding: 20,
-    "&:hover": {
-      backgroundColor: "black",
-      cursor: "pointer"
-    }
-  },
   image: {
     textAlign: "center",
-    height: 180,
-    width: 230
+    height: 40,
+    width: 50,
   },
-  name: {
-    fontSize: 20,
-    color: 'red',
-    textAlign: 'center'
+  table: {
+    minWidth: 650,
   },
-  modal: {
-
+  heading: {
+    fontWeight: "bold",
+  },
+  link:{
+    color: 'darkred'
   }
-
-})
+});
 
 const Teams = () => {
+  const classes = useStyles();
   const dispatch = useDispatch();
+
+  const { loadTeam } = useSelector((state) => state.team);
 
   useEffect(() => {
     dispatch(loadingTeams());
   }, [dispatch]);
 
-  const { loadTeam } = useSelector((state) => state.team);
-
-  const classes = useStyles()
-
   return (
     <>
-      <HeaderBlack/>
-      <Container className={classes.container}>
-        <Grid container className={classes.main} spacing={5}>
-          {loadTeam?.map((item) => {
-            return (
-              <Grid item xs={3}>
-                <NavLink to={`/team/${item._id}`}>
-                  <Box  variant="outlined" className={classes.inner}>
-                    <Box className={classes.image}>
-                      <img className={classes.image} src={item.image}/>
-                    </Box>
-                    <Box className={classes.name}>{item.name}</Box>
-                  </Box>
+      <HeaderBlack />
+      <Box maxHeight={580} overflow="auto" sx={{ mx: 18 }}>
+        <TableContainer component={Paper}>
+          <Table
+            className={classes.table}
+            size="small"
+            aria-label="a dense table"
+          >
+            <TableHead>
+              <TableRow>
+                <TableCell className={classes.heading}>Логотип</TableCell>
+                <TableCell align="right" className={classes.heading}>
+                  Название
+                </TableCell>
+                <TableCell align="right" className={classes.heading}>
+                  Капитан
+                </TableCell>
+                <TableCell align="right" className={classes.heading}>
+                  Состав
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {loadTeam?.map((row) => (
+                <TableRow key={row.name}>
+                  <TableCell><img className={classes.image} src={row.image} /></TableCell>
+                  <TableCell align="right">{row.name}</TableCell>
+                  <TableCell align="right">{row.captain.name}</TableCell>
+                  <TableCell align="right">
+                <NavLink to={`/team/${row._id}`}
+                 className={classes.link}>
+                  <i className="fas fa-eye"></i>
                 </NavLink>
-              </Grid>
-            );
-          })}
-        </Grid>
-      </Container>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Box>
     </>
   );
 };

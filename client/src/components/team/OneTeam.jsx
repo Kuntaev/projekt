@@ -4,7 +4,6 @@ import { loadOneTeam } from '../../redux/features/team';
 import { useParams } from "react-router-dom"
 import {
   Box,
-  CardMedia,
   Table,
   TableBody,
   TableCell, TableContainer,
@@ -14,23 +13,21 @@ import {
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import HeaderBlack from '../header/HeaderBlack';
-import Players from '../player/Players';
 import { loadPlayers } from '../../redux/features/player';
-import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles({
   main: {
-    display: 'flex'
+    display: 'flex',
+    justifyContent:'space-between'
   },
   image: {
-    width: 350,
+    width: 200,
   },
   teamName: {
-    fontSize: 100,
+    fontSize: 40,
   },
   captain: {
     color: 'green',
-    marginLeft: 300,
   },
   name: {
     marginRight: 5,
@@ -52,7 +49,6 @@ const useStyles = makeStyles({
   },
   boxs: {
     textAlign: 'center',
-    marginLeft: 200
   }
 })
 
@@ -72,7 +68,6 @@ const OneTeam = (props) => {
   }, [id, dispatch]);
 
   const { loadOneT } = useSelector((state) => state.team);
-  console.log(loadOneT)
   const { player } = useSelector((state) => state.player);
 
 
@@ -83,13 +78,14 @@ const OneTeam = (props) => {
   return (
     <div>
       <HeaderBlack/>
-      <Box className={classes.main}>
+      <Box sx={{ mx: 18 }} className={classes.main}>
         <Box className={classes.boxs}>
           <img className={classes.image} src={loadOneT?.image}/>
           <Typography className={classes.teamName}>
             {loadOneT?.name}
           </Typography>
         </Box>
+
       <Box className={classes.captain}>
         <Box className={classes.box}>
           <Typography className={classes.name}>
@@ -100,7 +96,7 @@ const OneTeam = (props) => {
           </Typography>
         </Box>
         <TableContainer>
-          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+          <Table size="small" aria-label="a dense table">
             <TableHead>
               <TableRow>
                 <TableCell className={classes.player}>Имя</TableCell>

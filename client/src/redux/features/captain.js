@@ -196,16 +196,13 @@ export const uploadAvatar = (file) => {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const response = await fetch(
-        "/captain/personal/avatar",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${state.captain.token}`,
-          },
-          body: formData,
-        }
-      );
+      const response = await fetch("/captain/personal/avatar", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${state.captain.token}`,
+        },
+        body: formData,
+      });
       const json = await response.json();
       dispatch({ type: "avatar/create/fulfilled", payload: json.avatar });
     } catch (e) {

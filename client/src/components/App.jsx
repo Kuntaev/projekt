@@ -1,14 +1,14 @@
-import MyTeamOne from './team/MyTeamOne';
+import MyTeamId from "./myTeam/MyTeamId";
 import React, { useState } from "react";
 import Main from "./main/Main";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import MyTeam from "./team/MyTeam";
+import MyTeam from "./myTeam/MyTeam";
 import Teams from "./team/Teams";
 import SignInPage from "./auth/SignInPage";
 import SignUpPage from "./auth/SignUpPage";
 import PersonalCaptain from "./personalArea/PersonalCaptain";
 import OneTeam from "./team/OneTeam";
-import Play from './play/Play';
+import Play from "./play/Play";
 import Header from "./header/Header";
 import HeaderBlack from "./header/HeaderBlack";
 
@@ -17,13 +17,13 @@ const App = () => {
     <BrowserRouter>
       <Switch>
         <Route exact path={"/my-teams/:id"}>
-          <MyTeamOne/>
+          <MyTeamId />
         </Route>
         <Route exact path="/">
           <Main />
         </Route>
         <Route path="/personal/captain">
-            <HeaderBlack/>
+          <HeaderBlack />
           <PersonalCaptain />
         </Route>
         <Route exact path={"/team/:id"}>
@@ -33,7 +33,7 @@ const App = () => {
           <Teams />
         </Route>
         <Route exact path="/my-teams">
-          <MyTeam/>
+          <MyTeam />
         </Route>
         <Route exact path="/">
           <Main />
@@ -46,7 +46,7 @@ const App = () => {
         <SignUpPage />
       </Route>
       <Route path="/play">
-        <Play/>
+        <Play />
       </Route>
     </BrowserRouter>
   );
