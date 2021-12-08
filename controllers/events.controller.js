@@ -4,15 +4,13 @@ const Captain = require("../models/Captain.model")
 module.exports.eventsController = ({
   addEvent: async (req, res) => {
     try {
-      const captain = await Captain.findById(req.captain.id)
+      const {name, longs, width, date, time,} = req.body
       await Event.create({
-        name: req.body.name,
-        longs: req.body.longs,
-        width: req.body.width,
-        date: req.body.date,
-        time: req.body.time,
-        teamId: req.body.teamId,
-        captain
+        name,
+        longs,
+        width,
+        date,
+        time,
       })
       if (!name) {
         return res.status(400).json({
@@ -26,7 +24,7 @@ module.exports.eventsController = ({
   },
   getEvents: async (req, res) => {
     try {
-      const events = await Event.find().populate('captain')
+      const events = await Event.find()
       res.json(events)
     } catch (e) {
       res.json("Ошибка при выводе событий " + e)
@@ -34,7 +32,7 @@ module.exports.eventsController = ({
   },
   getEventId: async (req, res) => {
     try {
-      const event = await Event.findById(req.params.id).populate('captain')
+      const event = await Event.findById(req.params.id)
       res.json(event)
     } catch (e) {
       res.json("Ошибка при выводе события " + e)

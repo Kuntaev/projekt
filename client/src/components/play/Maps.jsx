@@ -13,7 +13,8 @@ const Map = ReactMapboxGl({
 });
 
 function Maps({ handleSelectEvent, zoom, coordinate }) {
-  const events = useSelector((state) => state.events.events);
+
+  const events = useSelector((state) => state.event.events);
 
   return (
     <div>
@@ -27,7 +28,7 @@ function Maps({ handleSelectEvent, zoom, coordinate }) {
           overflow: "hidden",
         }}
       >
-        {events.map((event) => {
+        {events?.map((event) => {
           return (
             <div>
                 <Marker
