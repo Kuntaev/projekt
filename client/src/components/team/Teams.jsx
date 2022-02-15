@@ -71,7 +71,7 @@ const Teams = () => {
                 <TableRow key={row.name}>
                   <TableCell><img className={classes.image} src={row.image} /></TableCell>
                   <TableCell align="right">{row.name}</TableCell>
-                  <TableCell align="right">{row.captain.name}</TableCell>
+                  {/*<TableCell align="right">{row.captain.name}</TableCell>*/}
                   <TableCell align="right">
                 <NavLink to={`/team/${row._id}`}
                  className={classes.link}>
