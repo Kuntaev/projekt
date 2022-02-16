@@ -58,7 +58,6 @@ function CreateTeam({ state, onClose }) {
             error={nameError}
           />
           <TextField
-            autoFocus
             margin="dense"
             label="Ссылка логотипа"
             id="name"
