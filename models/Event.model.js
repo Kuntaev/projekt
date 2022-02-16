@@ -6,9 +6,13 @@ const eventSchema = mongoose.Schema({
   },
   longs: {
     type: Number,
+    min: -90,
+    max: 90,
   },
   width: {
     type: Number,
+    min: -90,
+    max: 90,
   },
   date: {
     type: String,
