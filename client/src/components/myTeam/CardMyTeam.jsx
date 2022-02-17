@@ -33,7 +33,7 @@ function CardMyTeam() {
     <Box sx={{ mx: 18 }}>
       {token ? (
         <Box overflow={"auto"} className={classes.btn1}>
-          {myTeam?.map((item) => {
+          {myTeam.map((item) => {
             return (
               <Card className={classes.root}>
                 <CardActionArea>

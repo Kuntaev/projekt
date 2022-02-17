@@ -3,7 +3,7 @@ import {
   Box,
   Button,
   Dialog,
-  DialogActions,
+  DialogActions, DialogContent, DialogTitle,
   TextField,
   Typography,
 } from "@material-ui/core";
@@ -71,6 +71,8 @@ const MyTeamId = () => {
 
   const [text, setText] = useState("");
   const [image, setImage] = useState("");
+  const [textError, setTextError] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   const { loadOneMyT } = useSelector((state) => state.team);
 
@@ -83,8 +85,18 @@ const MyTeamId = () => {
   }, []);
 
   const handleClickSave = () => {
-    dispatch(editTeam(id, text, image));
-    setOpen(false);
+
+    if (text == "") {
+      setTextError(true);
+    }
+    if (image == "") {
+      setImageError(true);
+    }
+    if (id && text && image) {
+      dispatch(editTeam(id, text, image));
+      setOpen(false);
+    }
+
   };
 
   const handleEditName = (e) => {
@@ -116,34 +128,35 @@ const MyTeamId = () => {
       <div>
         <HeaderBlack />
         <Dialog open={open} onClose={handleClose}>
-          <DialogActions>
-            <Box className={classes.btnsh}>
-              <Box>
-                <Box>
-                  <TextField
-                    id="outlined-multiline-static"
-                    label="Введите название команды"
-                    multiline
-                    rows={1}
-                    value={text}
-                    onChange={handleEditName}
-                    variant="outlined"
-                  />
-                </Box>
-                <Box>
-                  <TextField
-                    id="outlined-multiline-static"
-                    label="Вставте ссылку аватарки"
-                    multiline
-                    rows={1}
-                    value={image}
-                    onChange={handleEditImage}
-                    variant="outlined"
-                  />
-                </Box>
-              </Box>
-              <Box className={classes.btnsh2}>
-                <Box className={classes.btnSave}>
+          <DialogTitle>Введите пожалуйста новые данные</DialogTitle>
+              <DialogContent>
+                <form noValidate autoComplete="off" onSubmit={handleClickSave}>
+                    <TextField
+                      id="outlined-multiline-static"
+                      margin="dense"
+                      autoFocus
+                      label="Введите название команды"
+                      value={text}
+                      onChange={handleEditName}
+                      variant="outlined"
+                      required
+                      error={textError}
+                      fullWidth
+                    />
+                    <TextField
+                      id="outlined-multiline-static"
+                      margin="dense"
+                      label="Вставте ссылку аватарки"
+                      value={image}
+                      onChange={handleEditImage}
+                      variant="outlined"
+                      required
+                      error={imageError}
+                      fullWidth
+                    />
+                </form>
+              </DialogContent>
+            <DialogActions>
                   <Button
                     onClick={handleClickSave}
                     variant="contained"
@@ -151,7 +164,6 @@ const MyTeamId = () => {
                   >
                     Сохранить
                   </Button>
-                </Box>
                 <Button
                   onClick={handleClose}
                   variant="contained"
@@ -159,9 +171,7 @@ const MyTeamId = () => {
                 >
                   Закрыть
                 </Button>
-              </Box>
-            </Box>
-          </DialogActions>
+            </DialogActions>
         </Dialog>
         <Box className={classes.main}>
           <Box className={classes.boxs}>
