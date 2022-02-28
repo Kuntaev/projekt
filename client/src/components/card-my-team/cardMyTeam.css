@@ -1,0 +1,32 @@
+.card-team-main {
+  margin: 10px 10px;
+  height: 355px;
+}
+.card-team-btn1 {
+  display: flex;
+  flex-wrap: wrap;
+  height: 170px;
+  justify-content: space-between;
+}
+.card-team-root {
+  width: 115px;
+  margin-right: 0px;
+  margin-top: 5px;
+}
+.card-team-link {
+  text-decoration: none;
+  color: black;
+}
+.card-team-logo {
+  width: 21px;
+  height: 100px;
+}
+.card-team-name {
+  padding: 0;
+}
+.nameTeam {
+  padding: 16px;
+}
+.card-team-delete {
+  padding: 0;
+}

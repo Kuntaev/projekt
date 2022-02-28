@@ -1,0 +1,28 @@
+.adaptiveMain {
+  background-size: cover;
+  background-image: url("../../image/adaptive.jpg");
+  background-color: #454d35;
+  min-height: 100%;
+}
+.adaptiveContent {
+  padding-left: 8%;
+  padding-right: 10px;
+  margin-top: 75%;
+}
+.adaptiveText {
+  color: white;
+  font-family: "Roboto";
+  font-weight: bold;
+  font-size: 14px;
+}
+.adaptiveText2 {
+  color: white;
+  font-family: "Roboto";
+  font-weight: bold;
+  font-size: 22px;
+}
+.adaptiveBtn {
+  font-size: 12px;
+  padding: 5px;
+  margin-left: 100px;
+}

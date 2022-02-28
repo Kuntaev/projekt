@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { NavLink, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { outputCaptain } from "../../redux/features/captain";
-import "./Header.css";
+import "./HeaderBlack.css";
 import { useMediaQuery } from "@material-ui/core";
 import classNames from "classnames";
 
@@ -25,36 +25,38 @@ const useStyles = makeStyles({
   },
   navBar: {
     textDecoration: "none",
-    color: "white",
+    color: "black",
     fontSize: 16,
     fontFamily: "Roboto",
     fontWeight: "bold",
     outline: "none",
   },
   personalArea: {
-    color: "white",
-    fontFamily: "Roboto",
+    color: "black",
     fontWeight: "bold",
-    fontSize: 16,
+    fontFamily: "Roboto",
+    fontSize: "16px",
     textDecoration: "none",
   },
 });
 
-export const Header = () => {
+export const HeaderBlack = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
+  const token = useSelector((state) => state.captain.token);
+
   const isActive = useMediaQuery("(max-width: 640px)");
 
-  const main = classNames(!isActive ? classes.main : "headerMain");
-  const content = classNames(!isActive ? classes.content : "headerContent");
-  const navBar = classNames(!isActive ? classes.navBar : "headerNavBar");
-  const logo = classNames(!isActive ? classes.logo : "headerLogo");
-  const personalArea = classNames(
-    !isActive ? classes.personalArea : "headerPersonalArea"
+  const main = classNames(!isActive ? classes.main : "headerBlackMain");
+  const content = classNames(
+    !isActive ? classes.content : "headerBlackContent"
   );
-
-  const token = useSelector((state) => state.captain.token);
+  const navBar = classNames(!isActive ? classes.navBar : "headerBlackNavBar");
+  const logo = classNames(!isActive ? classes.logo : "headerBlackLogo");
+  const personalArea = classNames(
+    !isActive ? classes.personalArea : "headerBlackPersonalArea"
+  );
 
   const handleOutput = () => {
     dispatch(outputCaptain());
@@ -63,9 +65,9 @@ export const Header = () => {
     <>
       <div className={main}>
         <div className={content}>
-          <NavLink to="/" className={navBar}>
+          <NavLink to="/" className={classes.navBar}>
             <img
-              src="https://i.postimg.cc/D0V74z05/logo.png"
+              src="https://i.postimg.cc/pVFgPJv5/fdfdf.png"
               className={logo}
               alt=""
             />
@@ -89,17 +91,10 @@ export const Header = () => {
             Личный кабинет
           </NavLink>
         ) : (
-          <NavLink to="/sign-in" style={{ color: "white", fontSize: 24 }}>
+          <NavLink to="/sign-in" style={{ color: "black", fontSize: 24 }}>
             <i className="fas fa-user" />
           </NavLink>
         )}
-        {/*{token ? (*/}
-        {/*  // <Link  className={classes.edit-profile} id="edit-profile" to="/">*/}
-        {/*  //   <div  onClick={handleOutput}>Выход</div>*/}
-        {/*  // </Link>*/}
-        {/*) : (*/}
-        {/*  ""*/}
-        {/*)}*/}
       </div>
     </>
   );

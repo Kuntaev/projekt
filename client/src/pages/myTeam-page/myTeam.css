@@ -1,0 +1,49 @@
+.my-team-btn {
+  padding: 0 10px;
+}
+.my-team-teamBox {
+  background-image: url(../../image/myTeams.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 30%;
+  text-align: center;
+  padding-top: 30px;
+}
+.my-team-text {
+  font-size: 7px;
+  font-family: Roboto;
+  margin: 5px 10px;
+  color: white;
+  text-align: start;
+  line-height: 17px;
+}
+.my-team-createTeam {
+  font-size: 8px;
+  text-decoration: none;
+  outline: none;
+  display: inline-block;
+  padding: 3px 6px;
+  margin: 36px 10px;
+  position: relative;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: none;
+  font-weight: 300;
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.my-team-createTeam:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.my-team-createTeam:active {
+  background-color: rgba(33 32 32 / 42%);
+}
+.my-team-link {
+  text-decoration: none;
+  color: white;
+}
+.adaptive-myTeams-image {
+  max-width: 100%;
+}

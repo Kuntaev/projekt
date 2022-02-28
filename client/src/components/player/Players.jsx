@@ -9,14 +9,14 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  useMediaQuery,
 } from "@material-ui/core";
 import { useParams } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
+import useStyles from "../my-team/StyleMyTeam";
 import Button from "@material-ui/core/Button";
+import classNames from "classnames";
 
-const useStyles = makeStyles({});
-
-const Players = () => {
+export const Players = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -28,11 +28,17 @@ const Players = () => {
 
   const { player } = useSelector((state) => state.player);
 
+  const isActive = useMediaQuery("(max-width: 640px)");
+
+  const playersBlock = classNames(
+    !isActive ? classes.playersBlock : "players-block"
+  );
+
   const handleDeletePlayer = (id) => {
     dispatch(playerDelete(id));
   };
   return (
-    <Box>
+    <Box className={playersBlock} overflow="auto">
       <TableContainer>
         <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
           <TableHead>
@@ -60,6 +66,7 @@ const Players = () => {
                       onClick={() => handleDeletePlayer(item?._id)}
                       variant="contained"
                       color="secondary"
+                      size="small"
                     >
                       Удалить
                     </Button>
@@ -73,5 +80,3 @@ const Players = () => {
     </Box>
   );
 };
-
-export default Players;

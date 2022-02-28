@@ -1,0 +1,27 @@
+.event-play-main {
+  padding: 10px;
+}
+.event-play-contentOne {
+  height: 230px;
+  padding-bottom: 20px;
+  box-shadow: 1px 2px 2px 1px rgb(165 165 165 / 20%);
+}
+.event-play-maps {
+  display: block;
+  margin-top: 40px;
+}
+.event-play-addTodo:active {
+  color: darkgreen;
+}
+.event-play-addTodo {
+  display: block;
+  color: white;
+  background-color: green;
+}
+.event-play-mainText {
+  font-size: 7px;
+  font-weight: bold;
+}
+.event-play-miniText {
+  font-size: 6px;
+}
