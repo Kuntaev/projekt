@@ -1,0 +1,20 @@
+.teams-main {
+  padding: 0 10px;
+  max-height: 350px;
+}
+.teams-image {
+  text-align: center;
+  height: 15px;
+  width: 20px;
+}
+.teams-table {
+  width: 400px;
+}
+.teams-heading {
+  font-size: 7px;
+  font-weight: bold;
+}
+.teams-link {
+  color: darkred;
+  font-size: 10px;
+}

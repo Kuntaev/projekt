@@ -1,32 +1,32 @@
-.headerMain {
+.headerBlackMain {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 5px 10px;
   margin: auto;
 }
-.headerContent {
+.headerBlackContent {
   width: 60%;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.headerLogo {
+.headerBlackLogo {
   width: 30px;
 }
-.headerNavBar {
+.headerBlackNavBar {
   text-decoration: none;
   font-size: 7px;
   font-family: Roboto;
   font-weight: bold;
   outline: none;
-  color: white;
+  color: black;
 }
-.headerPersonalArea {
+.headerBlackPersonalArea {
   font-weight: bold;
   font-family: Roboto;
   outline: none;
   font-size: 7px;
   text-decoration: none;
-  color: white;
+  color: black;
 }

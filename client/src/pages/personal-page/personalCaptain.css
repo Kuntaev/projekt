@@ -1,0 +1,19 @@
+.my-personal-paperData {
+  padding: 25px 15px;
+  width: 100%;
+}
+.my-personal-area {
+  padding-top: 15px;
+}
+.my-personal-next {
+  font-size: 12px;
+  font-family: Roboto;
+}
+.my-personal-data {
+  font-size: 12px;
+  font-family: Roboto;
+}
+.MuiGrid-spacing-xs-5 > .MuiGrid-item {
+  padding: 20px;
+  text-align: -webkit-center;
+}
