@@ -121,7 +121,7 @@ const useStyles = makeStyles({
     fontSize: 16,
     lineHeight: "2em",
     width: 600,
-    padding: "74px 50px",
+    padding: "30px 50px",
   },
   link: {
     color: "white",

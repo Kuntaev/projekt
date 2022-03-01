@@ -1,22 +1,20 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
+  Avatar,
   Box,
   Button,
   Container,
-  Grid,
+  CssBaseline,
   Link,
-  Paper,
   TextField,
   Typography,
+  useMediaQuery,
 } from "@material-ui/core";
-import Avatar from "@material-ui/core/Avatar";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { authorizationCaptain } from "../../redux/features/captain";
-import { HeaderBlack } from "../../components/header-black";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -36,6 +34,17 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  main: {
+    padding: "15px 150px",
+  },
+  adaptMain: {
+    padding: "5px 10px",
+  },
+  link: {
+    textDecoration: "none",
+    color: "3f51b5",
+    fontFamily: "Roboto",
+  },
 }));
 
 export const SignInPage = () => {
@@ -51,6 +60,10 @@ export const SignInPage = () => {
     (state) => state.captain.authorizationError
   );
 
+  const isActive = useMediaQuery("(max-width: 640px)");
+
+  let main = !isActive ? classes.main : classes.adaptMain;
+
   const handleLogin = (e) => {
     setLogin(e.target.value);
   };
@@ -64,13 +77,13 @@ export const SignInPage = () => {
           history.push("/");
         }
       })
-      .catch((e) => {
-        console.log(e);
-      });
+      .catch((e) => {});
   };
   return (
-    <>
-      <HeaderBlack />
+    <div className={main}>
+      <NavLink to="/" className={classes.link}>
+        Назад
+      </NavLink>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
@@ -80,17 +93,15 @@ export const SignInPage = () => {
           <Typography component="h1" variant="h5">
             Вход
           </Typography>
-          <form className={classes.form} noValidate>
+          <form noValidate>
             <TextField
               onChange={handleLogin}
+              autoComplete="email"
               variant="outlined"
               margin="normal"
               required
               fullWidth
-              id="email"
               label="Логин"
-              name="email"
-              autoComplete="email"
               autoFocus
             />
             <TextField
@@ -99,33 +110,29 @@ export const SignInPage = () => {
               margin="normal"
               required
               fullWidth
-              name="password"
               label="Пароль"
-              type="password"
-              id="password"
               autoComplete="current-password"
+              type="password"
             />
-            <Button
-              onClick={handleSubmit}
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Войти
-            </Button>
-            <Grid container>
-              <Grid item>
-                <Link href="/sign-up" variant="body2">
-                  {"У вас нет аккаунта? Зарегистрироваться"}
-                </Link>
-              </Grid>
-            </Grid>
+            <Box className={classes.link}>
+              <Link href="/sign-up" variant="body2">
+                У вас нет аккаунта? Зарегистрироваться
+              </Link>
+            </Box>
+            <Box>
+              <Button
+                fullWidth
+                onClick={handleSubmit}
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+              >
+                Авторизоваться
+              </Button>
+            </Box>
           </form>
         </div>
-        <Box mt={8}></Box>
       </Container>
-    </>
+    </div>
   );
 };
