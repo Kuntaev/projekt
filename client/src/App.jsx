@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { MyTeam } from "./pages/myTeam-page";
 import { Teams } from "./pages/teams-page";
 import { SignInPage } from "./pages/signIn-page";
-import SignUpPage from "./pages/signUp-page/SignUpPage";
+import { SignUpPage } from "./pages/signUp-page";
 import { PersonalCaptain } from "./pages/personal-page";
 import OneTeam from "./pages/oneTeam-page/OneTeam";
 import { Play } from "./pages/events-page";

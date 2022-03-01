@@ -78,6 +78,7 @@ module.exports.captainController = {
         res.status(401).json({ authorizationError: "неверный логин" });
       }
       const valid = await bcrypt.compare(password, candidate.password);
+
       if (!valid) {
         res.status(401).json({ authorizationError: "неверный пароль" });
       }
@@ -90,7 +91,7 @@ module.exports.captainController = {
         expiresIn: "24h",
       });
 
-      res.status(200).json({ token });
+      res.status(200).json({ token, payload });
     } catch (e) {
       res.status(400).json(`Ошибка при  регистрации: ${e.toString()}`);
     }

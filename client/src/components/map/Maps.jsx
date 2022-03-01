@@ -17,7 +17,7 @@ const Map = ReactMapboxGl({
 function Maps({ handleSelectEvent, zoom, coordinate }) {
   const isActive = useMediaQuery("(max-width: 640px)");
 
-  let height = !isActive ? "500px" : "300px";
+  let height = !isActive ? "500px" : "250px";
   let width = !isActive ? "750px" : "355px";
 
   const events = useSelector((state) => state.event.events);

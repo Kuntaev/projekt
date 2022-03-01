@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
+  Avatar,
   Box,
   Button,
+  Container,
+  CssBaseline,
   Grid,
   Link,
   Paper,
@@ -12,43 +15,29 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { registrationCaptain } from "../../redux/features/captain";
 import { useHistory } from "react-router-dom";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
-const useStyles = makeStyles({
-  name: {
-    margin: "15px",
-    textAlign: "center",
-  },
+const useStyles = makeStyles((theme) => ({
   paper: {
-    margin: "200px 330px",
-    width: "800px",
-    height: "400px",
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
-  img: {
-    backgroundImage:
-      "URL(https://images.pexels.com/photos/3571065/pexels-photo-3571065.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)",
-    //  width: "1000px",
-    height: "900px",
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
   },
-
-  gridMain: {
-    textAlign: "center",
-    width: "650px",
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(3),
   },
   submit: {
-    fontSize: "18px",
+    margin: theme.spacing(3, 0, 2),
   },
-  login: {
-    marginLeft: "180px",
-  },
-  link: {
-    margin: "20px 10px",
-  },
-  data: {
-    margin: "10px 170px 10px",
-  },
-});
+}));
 
-const SignUpPage = () => {
+export const SignUpPage = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -91,127 +80,91 @@ const SignUpPage = () => {
   };
 
   return (
-    <Grid container className={classes.img}>
-      <div className="big">5y7</div>
-      <Grid className={classes.gridMain}>
-        <Paper className={classes.paper} elevation={5}>
-          <Box className={classes.main}>
-            <Box>
-              <Typography component="p" variant="h5">
-                Регистрация
-              </Typography>
-              <Typography
-                component="h1"
-                variant="body2"
-                color={message ? "primary" : "error"}
-              >
-                {message ? (
-                  <Box className={classes.registr}>
-                    {history.push("/sign-in")}
-                  </Box>
-                ) : (
-                  ""
-                )}
-                {
-                  <Typography component="p" variant="h6">
-                    {registrationError}
-                  </Typography>
-                }
-              </Typography>
-            </Box>
-            <form noValidate className={classes.form}>
-              <Grid className={classes.data} container spacing={2}>
-                <Grid item={4}>
-                  <Box>
-                    <TextField
-                      onChange={handleMail}
-                      variant="outlined"
-                      required
-                      label="Почта"
-                    />
-                  </Box>
-                </Grid>
-                <Grid item={4}>
-                  <Box>
-                    <TextField
-                      onChange={handleAvatar}
-                      variant="outlined"
-                      required
-                      label="Фото"
-                    />
-                  </Box>
-                </Grid>
-              </Grid>
-
-              <Grid className={classes.data} container spacing={2}>
-                <Grid item={4}>
-                  <Box>
-                    <TextField
-                      onChange={handleName}
-                      variant="outlined"
-                      required
-                      label="Имя"
-                      autoComplete="имя"
-                    />
-                  </Box>
-                </Grid>
-                <Grid item={4}>
-                  <Box>
-                    <TextField
-                      onChange={handleSurname}
-                      variant="outlined"
-                      required
-                      label="Фамилия"
-                    />
-                  </Box>
-                </Grid>
-              </Grid>
-
-              <Grid container spacing={2}>
-                <Grid className={classes.login} item={6}>
-                  <TextField
-                    onChange={handleLogin}
-                    autoComplete
-                    variant="outlined"
-                    required
-                    fullWidth
-                    label="Логин"
-                    autoFocus
-                  />
-                </Grid>
-                <Grid item={6}>
-                  <TextField
-                    onChange={handlePassword}
-                    variant="outlined"
-                    required
-                    fullWidth
-                    label="Пароль"
-                    autoComplete
-                    type="password"
-                  />
-                </Grid>
-              </Grid>
-              <Box className={classes.link}>
-                <Link href="/sign-in" variant="body2">
-                  У вас уже есть аккаунт? Войти
-                </Link>
-              </Box>
-              <Box>
-                <Button
-                  onClick={handleSubmit}
-                  variant="contained"
-                  color="primary"
-                  className={classes.submit}
-                >
-                  Зарегистрироваться
-                </Button>
-              </Box>
-            </form>
-          </Box>
-        </Paper>
-      </Grid>
-    </Grid>
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign up
+        </Typography>
+        <form className={classes.form} noValidate>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                sm={6}
+                onChange={handleMail}
+                variant="outlined"
+                required
+                label="Почта"
+                autoFocus
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                onChange={handleAvatar}
+                variant="outlined"
+                required
+                label="Фото"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                onChange={handleName}
+                variant="outlined"
+                required
+                label="Имя"
+                autoComplete="имя"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                onChange={handleSurname}
+                variant="outlined"
+                required
+                label="Фамилия"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                onChange={handleLogin}
+                autoComplete
+                variant="outlined"
+                required
+                label="Логин"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                onChange={handlePassword}
+                variant="outlined"
+                required
+                label="Пароль"
+                autoComplete
+                type="password"
+              />
+            </Grid>
+          </Grid>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={handleSubmit}
+          >
+            Зарегистрироваться
+          </Button>
+          <Grid container justifyContent="flex-end">
+            <Grid item>
+              <Link href="/sign-in" variant="body2">
+                У вас уже есть аккаунт? Войти
+              </Link>
+            </Grid>
+          </Grid>
+        </form>
+      </div>
+    </Container>
   );
 };
-
-export default SignUpPage;
