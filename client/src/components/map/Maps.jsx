@@ -5,8 +5,7 @@ import mapboxgl from "mapbox-gl";
 import { useMediaQuery } from "@material-ui/core"; // This is a dependency of react-map-gl even if you didn't explicitly install it
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
-mapboxgl.workerClass =
-  require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
+mapboxgl.workerClass = require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
 
 const Map = ReactMapboxGl({
   accessToken:
